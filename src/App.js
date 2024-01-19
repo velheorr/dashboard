@@ -8,26 +8,29 @@ import {Layout} from "./components/Layout";
 import {Login} from "./pages/login/Login";
 
 import {RequireAuth} from "./hoc/RequireAuth";
+import {AuthProvider} from "./hoc/AuthProvider";
 
 function App() {
     return (
-        <>
+        <AuthProvider>
             <Routes>
+                <Route path='login' element={<Login/>}/>
                 <Route path='/' element={<Layout/>}>
-                    <Route index element={<Main/>}/>
-                    <Route path='login' element={<Login/>}/>
-
+                   {/* <Route index element={<Main/>}/>*/}
+                    <Route index element={
+                        <RequireAuth>
+                            <Main/>
+                        </RequireAuth>
+                    }/>
                     <Route path='counter' element={
                         <RequireAuth>
                             <Counter/>
                         </RequireAuth>
-
                     }/>
-
                     <Route path='*' element={<Page404/>}/>
                 </Route>
             </Routes>
-        </>
+        </AuthProvider>
     );
 }
 
