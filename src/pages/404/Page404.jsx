@@ -12,7 +12,6 @@ const Page404 = () => {
             Error 404
             <p>Page not found</p>
             <button onClick={goBack}>Back</button>
-            <button onClick={goHome}>Back</button>
         </div>
     );
 };
