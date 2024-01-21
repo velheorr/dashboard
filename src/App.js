@@ -8,7 +8,7 @@ import {Login} from "./pages/login/Login";
 
 import {RequireAuth} from "./hoc/RequireAuth";
 import {AuthProvider} from "./hoc/AuthProvider";
-import Header from "./pages/header/Header";
+import Main from "./pages/main/Main";
 
 function App() {
     return (
@@ -17,16 +17,17 @@ function App() {
                 <Route path='login' element={<Login/>}/>
                 <Route path='*' element={<Page404/>}/>
                 <Route path='/' element={<Layout/>}>
-                    {/*<Route  element={*/}
-                    {/*    <RequireAuth>*/}
-                    {/*        <Header/>*/}
-                    {/*    </RequireAuth>*/}
-                    {/*}/>*/}
-                    <Route index  element={
+                    <Route index element={
+                        <RequireAuth>
+                            <Main/>
+                        </RequireAuth>
+                    }/>
+                    <Route path='counter'  element={
                         <RequireAuth>
                             <Counter/>
                         </RequireAuth>
                     }/>
+
                 </Route>
             </Routes>
         </AuthProvider>

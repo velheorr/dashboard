@@ -1,7 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography} from "@mui/material";
 import {useAuth} from "../../hook/useAuth";
 import {useNavigate} from "react-router";
+import LogoutIcon from '@mui/icons-material/Logout';
+
+
+import './header.scss'
+
 
 function MenuIcon() {
     return null;
@@ -30,22 +35,33 @@ const Header = () => {
         .replace(/(\u0433\.?)/, "");
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" sx={{background: '#0b7700'}}>
+        <Box sx={{ flexGrow: 1, mb: '70px' }}>
+            <AppBar position="fixed" sx={{background: '#0b7700'}}>
                 <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         GUARDIAN DASHBOARD
                     </Typography>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {ruDate}
                     </Typography>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         Главное меню?
                     </Typography>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {formattedTime}
                     </Typography>
-                    <Button color="inherit" onClick={handleLogout}>SignOut</Button>
+                    <Box>
+                        <Tooltip title="Выйти из приложения" onClick={handleLogout}>
+                            <IconButton color={'inherit'}>
+                                <LogoutIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Выйти из приложения" onClick={handleLogout}>
+                            <IconButton color={'inherit'}>
+                                <LogoutIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
                 </Toolbar>
             </AppBar>
         </Box>

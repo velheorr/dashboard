@@ -10,7 +10,10 @@ const Layout = () => {
                 <NavLink to="/counter">Counter</NavLink>*/}
                 <Header/>
             </header>
-            <Outlet/>
+            <main>
+                <Outlet/>
+            </main>
+
             <footer>
                 2024
             </footer>
