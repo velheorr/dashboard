@@ -15,7 +15,7 @@ const Layout = () => {
             </main>
 
             <footer>
-                2024
+
             </footer>
         </>
     );
