@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {AppBar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography} from "@mui/material";
+import {AppBar, Box, IconButton, Toolbar, Tooltip, Typography} from "@mui/material";
 import {useAuth} from "../../hook/useAuth";
 import {useNavigate} from "react-router";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -16,14 +16,15 @@ import {palette} from "../../utils/theme";
 const Header = () => {
     const navigate = useNavigate();
     const {signOut} = useAuth()
-
     const dispatch = useDispatch();
     const mode = useSelector(state => state.header.mode);
 
+    // смена темы
     const toggleTheme = () => {
         dispatch(setMode())
     }
 
+    // разлогинить
     const handleLogout = () => {
         signOut(()=> navigate('/', {replace: true}));
     }
