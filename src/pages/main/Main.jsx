@@ -8,8 +8,8 @@ const Main = () => {
 
 
 	const [] = useState(true)
-	const darkTheme = useSelector(state => state.header.darkTheme);
-	const theme = darkTheme ? 'dark' : null;
+	const mode = useSelector(state => state.header.mode);
+	const theme = mode ? 'dark' : null;
 
 
 	return (

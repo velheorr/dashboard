@@ -1,14 +1,16 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 
 const initialState = {
-    darkTheme: false,
+    mode: 'light',
 }
 
 const headerSlice = createSlice({
     name: 'header',
     initialState,
     reducers: {
-       changeTheme: (state) => {state.darkTheme = !state.darkTheme},
+        setMode: (state) => {
+            state.mode = state.mode === "light" ? "dark" : "light";
+        },
     },
 });
 
@@ -16,5 +18,5 @@ const {actions, reducer} = headerSlice;
 
 export default reducer;
 export const {
-    changeTheme,
+    setMode,
 } = actions;

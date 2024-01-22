@@ -5,6 +5,13 @@
 }
 
 .logo {
-    flex-basis: 12%;
+    flex-basis: 18%;
     text-align: center;
+    background: rgb(76, 178, 66);
+    width: 20%;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
