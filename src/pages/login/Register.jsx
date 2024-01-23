@@ -8,22 +8,15 @@ import TextField from "@mui/material/TextField";
 import {useForm} from "react-hook-form";
 import {palette} from "../../utils/theme";
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const {signIn} = useAuth()
 
     const fromPage = location.state?.from?.pathname || '/';
 
-   /* const formSubmit = (event) =>{
-        event.preventDefault();
-        const form = event.target
-        const user = form.username.value;
 
-        signIn(user, ()=> navigate(fromPage, {replace: true}));
-    }*/
-
-    const {register,handleSubmit,formState: { errors },} = useForm()
+    const {register,handleSubmit,formState: { errors },watch} = useForm()
 
     const onSubmit = (data) => {
         /*console.log(data)*/
@@ -37,7 +30,7 @@ const Login = () => {
                     <div>
                         <img className='img' src={logo} alt=""/>
                         <Typography sx={{mt: 2}} align='center' variant="h5" gutterBottom>DASHBOARD</Typography>
-                        <Typography sx={{mt: 2}} align='left' variant="h6" gutterBottom>Авторизация:</Typography>
+                        <Typography sx={{mt: 2}} align='left' variant="h6" gutterBottom>Регистрация:</Typography>
                         <Box
                             onSubmit={handleSubmit(onSubmit)}
                             component="form"
@@ -58,11 +51,16 @@ const Login = () => {
                                        error={errors.password && true}
                                        helperText={errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}
                             />
+                            <TextField fullWidth  id="passwordConfirm" label="Повторите пароль" required variant="outlined" type='password' size='small'
+                                       {...register("passwordConfirm", {required: true, validate: (value) => value === watch("password") || "Пароли не совпадают"})}
+                                       error={errors.passwordConfirm && true}
+                                       helperText={errors.passwordConfirm && <span style={{color: 'red'}}>{errors.passwordConfirm.message}</span>}
+                            />
                             <Button fullWidth variant="outlined" type='submit' size='small' color="success">Войти</Button>
                         </Box>
                         <Box sx={{textAlign: 'right', mt: 2}}>
                             <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
-                                Ещё не зарегистрированы? <Link to='/register'>Регистрация</Link>
+                                Ещё не зарегистрированы? <Link to='/'>Регистрация</Link>
                             </Typography>
                             <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
                                 Забыли пароль? <Link to='/'>Сброс пароля</Link>
@@ -76,6 +74,6 @@ const Login = () => {
     );
 };
 
-export  {Login};
+export  {Register};
 
 

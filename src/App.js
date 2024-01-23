@@ -12,6 +12,7 @@ import Main from "./pages/main/Main";
 import {createTheme, ThemeProvider} from "@mui/material";
 import {themeMode} from "./utils/theme";
 import {useSelector} from "react-redux";
+import {Register} from "./pages/login/Register";
 
 function App() {
     const mode = useSelector(state => state.header.mode);
@@ -26,6 +27,7 @@ function App() {
             <ThemeProvider theme={theme}>
                 <Routes>
                     <Route path='login' element={<Login/>}/>
+                    <Route path='register' element={<Register/>}/>
                     <Route path='*' element={<Page404/>}/>
                     <Route path='/' element={<Layout/>}>
                         <Route index element={
