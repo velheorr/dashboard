@@ -7,16 +7,24 @@ import logo from '../../img/logo.png';
 import TextField from "@mui/material/TextField";
 import {useForm} from "react-hook-form";
 import {palette} from "../../utils/theme";
+import { yupResolver } from "@hookform/resolvers/yup";
+import {registerSchema} from "./verify";
 
 const Register = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const {signIn} = useAuth()
-
     const fromPage = location.state?.from?.pathname || '/';
 
-
-    const {register,handleSubmit,formState: { errors },watch} = useForm()
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm({
+        mode: "onTouched",
+        resolver: yupResolver(registerSchema)
+    });
 
     const onSubmit = (data) => {
         /*console.log(data)*/
@@ -38,32 +46,27 @@ const Register = () => {
                             noValidate
                             autoComplete="off"
                         >
-                            <TextField fullWidth  id="email" label="E-mail" required variant="outlined" type='email'  size='small'
-                                       {...register("email", {required: 'Укажите ваш Email', pattern: {
-                                               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                               message: "Некорректный адрес электронной почты"
-                                           } })}
+                            <TextField fullWidth  id="email" label="E-mail"  variant="outlined" type='email' size='small'
+                                       {...register("email")}
                                        error={errors.email && true}
                                        helperText={errors.email && <span style={{color: 'red'}}>{errors.email.message}</span>}
                             />
-                            <TextField fullWidth  id="password" label="Пароль" required variant="outlined" type='password' size='small'
-                                       {...register("password", {required: 'Введите пароль'})}
+                            <TextField fullWidth  id="password" label="Пароль" variant="outlined" type='password' size='small'
+                                       {...register("password")}
                                        error={errors.password && true}
                                        helperText={errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}
                             />
-                            <TextField fullWidth  id="passwordConfirm" label="Повторите пароль" required variant="outlined" type='password' size='small'
-                                       {...register("passwordConfirm", {required: true, validate: (value) => value === watch("password") || "Пароли не совпадают"})}
-                                       error={errors.passwordConfirm && true}
-                                       helperText={errors.passwordConfirm && <span style={{color: 'red'}}>{errors.passwordConfirm.message}</span>}
+                            <TextField fullWidth  id="cpassword" label="Повторите пароль" required variant="outlined" type='password' size='small'
+
+                                       {...register("cpassword")}
+                                       error={errors.cpassword && true}
+                                       helperText={errors.cpassword && <span style={{color: 'red'}}>{errors.cpassword.message}</span>}
                             />
-                            <Button fullWidth variant="outlined" type='submit' size='small' color="success">Войти</Button>
+                            <Button fullWidth variant="outlined" type='submit' size='small' color="success">Зарегистрироваться</Button>
                         </Box>
                         <Box sx={{textAlign: 'right', mt: 2}}>
                             <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
-                                Ещё не зарегистрированы? <Link to='/'>Регистрация</Link>
-                            </Typography>
-                            <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
-                                Забыли пароль? <Link to='/'>Сброс пароля</Link>
+                                Уже зарегистрированы? <Link to='/login'>Войти</Link>
                             </Typography>
                         </Box>
                     </div>
