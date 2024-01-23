@@ -63,7 +63,7 @@ export const themeSettings = {
     },
 };
 
-export const themeMode = (mode: PaletteMode) => {
+export const themeMode = (mode) => {
     return {
         palette: {
             mode: mode,

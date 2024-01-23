@@ -45,8 +45,8 @@ const Header = () => {
         .replace(/(\u0433\.?)/, "");
 
     return (
-        <Box sx={{ flexGrow: 1, mb: '64px' }}>
-            <AppBar position="fixed" sx={{background: mode === "dark" ? palette.grey[500] : palette.grey[700]}}>
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="relative" sx={{background: mode === "dark" ? palette.grey[500] : palette.grey[700]}}>
                 <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: '0 !important'}}>
                     <Box className='logo'>
                         <Typography component="div">GUARDIAN</Typography>

@@ -11,7 +11,7 @@ const Page404 = () => {
     const goHome = () => navigate('/', {replace: true}) //ddon't use, Link to=
 
     return (
-        <div>
+        <div className='block'>
             <Card sx={{maxWidth: 275}}>
                 <CardContent>
                     <h2>Ошибка 404</h2>
