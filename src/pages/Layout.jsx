@@ -1,4 +1,5 @@
 import React from 'react';
+import './layout.scss'
 import {NavLink, Outlet} from "react-router-dom";
 import Header from "./header/Header";
 import {useSelector} from "react-redux";
@@ -6,7 +7,6 @@ import {palette} from "../utils/theme";
 
 const Layout = () => {
     const mode = useSelector(state => state.header.mode);
-    /*sx={{background: mode === "dark" ? palette.grey[500] : palette.grey[700]}*/
 
     return (
         <>
