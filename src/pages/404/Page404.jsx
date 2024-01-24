@@ -1,7 +1,7 @@
 import React from 'react';
 import './404.scss'
 import {useNavigate} from "react-router";
-import {Button, Card, CardContent} from "@mui/material";
+import {Box, Button, Card, CardContent} from "@mui/material";
 import {palette} from "../../utils/theme";
 
 const Page404 = () => {
@@ -12,7 +12,7 @@ const Page404 = () => {
 
     return (
         <div className='block'>
-            <Card sx={{maxWidth: 275}}>
+            {/*<Card sx={{maxWidth: 275}}>
                 <CardContent>
                     <h2>Ошибка 404</h2>
                     <p>Страница не найдена</p>
@@ -36,7 +36,31 @@ const Page404 = () => {
                     </Button>
                 </CardContent>
 
-            </Card>
+            </Card>*/}
+            <Box sx={{maxWidth: 275}}>
+
+                    <h1>Ошибка 404</h1>
+                    <h2>Страница не найдена</h2>
+                    <Button
+                        style={{ background: palette.primary[900], color: palette.white }}
+                        onClick={goBack}
+                        variant="contained"
+                    >
+                        Назад
+                    </Button>
+                    <Button
+                        style={{
+                            background: palette.primary[900],
+                            color: palette.white,
+                            marginLeft: "10px",
+                        }}
+                        onClick={goHome}
+                        variant="contained"
+                    >
+                        На главную
+                    </Button>
+
+            </Box>
         </div>
     );
 };
