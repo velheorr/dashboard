@@ -2,41 +2,46 @@ import React, {useEffect, useState} from 'react';
 import Chart from "../chart/Chart";
 
 import './main.scss'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Filters} from "./subpages/Filters";
 import {Box, Paper, Typography} from "@mui/material";
 import SimpleSlider from "./subpages/slider/Slider";
-import {fetchData} from "./MainSlice";
-import axios from "axios";
+
+
+import {getData, setFilteredKontragentByHolding, setHoldings, setKontragent} from "./MainSlice";
+import {useGetQuery} from "../../hook/useGetQuery";
+import {prepareSelect} from "../../utils/func";
+
+
+
 
 const Main = () => {
 
-/*	async function fetchCatalog(){   // загрузка всего каталога
-		const x = await fetchData()
-		console.log(x)
-	}
+	const dataFromDB = useSelector(state => state.mainData.dataFromDB);
+
+	const dispatch = useDispatch();
+
+	const {data, isLoading, isError} = useGetQuery()
 
 	useEffect(()=>{
-		/!*const data  = fetchData()
-		console.log(data)*!/
-		fetchCatalog()
-	}, [])*/
+		dispatch(getData(data))
+		if (dataFromDB !== undefined){
+			 dispatch(setHoldings(prepareSelect(dataFromDB, 'Холдинг')))
+			 dispatch(setKontragent(prepareSelect(dataFromDB, 'Контрагент')))
+			 dispatch(setFilteredKontragentByHolding(prepareSelect(dataFromDB, 'Контрагент')))
+		}
+	}, [data, dataFromDB])
 
-	const [post, updatePost] = useState({title: ''})
 
-	/*useEffect(() => {
-		axios.get("https://mail.grdn.ru:777/upp_hs_ap/hs/v3/GetBlocSales")
-			.then(({ data }) => {
-				updatePost(data)
-				console.log(data)
-				console.log(post)
-			})
+	if (isLoading) {return <h3>load</h3>}
+	if (isError) {return <h3>error</h3>}
+	if (!data) {return <h3>no data</h3>}
 
-	}, [post])*/
+
 
 	return (
 		<div className='main'>
-			<Filters/>
+			<Filters  />
 			<Typography sx={{textAlign: 'center'}} variant="h6">Список объектов</Typography>
 			<SimpleSlider/>
 

@@ -16,8 +16,10 @@ import {Register} from "./pages/login/Register";
 import {ResetPassword} from "./pages/login/ResetPassword";
 
 function App() {
-    const mode = useSelector(state => state.header.mode);
 
+
+
+    const mode = useSelector(state => state.header.mode);
     const theme = useMemo(
         () => createTheme(themeMode),
     [mode]
