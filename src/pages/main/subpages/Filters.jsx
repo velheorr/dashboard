@@ -21,7 +21,7 @@ const Filters = () => {
         setHolding(event.target.value);
     };
     const handleChangeZakazchik = (event) => {
-
+        setHolding(dataFromDB.find(item => item.Контрагент === event.target.value).Холдинг)
         setZakazchik(event.target.value);
     };
 
@@ -59,7 +59,7 @@ const Filters = () => {
                         <MenuItem value=""><em>Не выбран</em></MenuItem>
                         {
                             filteredKontragentByHolding.map((item, i) => {
-                            return <MenuItem key={i} value={item}>{item}</MenuItem>
+                                return <MenuItem key={i} value={item}>{item}</MenuItem>
                             })
                         }
                     </Select>
