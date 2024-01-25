@@ -14,20 +14,6 @@ const Filters = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-
-    }, [filteredKontragentByHolding])
-
-    const renderSelectHolding = selectHolding.map((item, i) => {
-        let x = item === ''? 'Не указан' : item
-        return <MenuItem key={i} value={x}>{x}</MenuItem>
-    })
-    const renderSelectKontragent = filteredKontragentByHolding.map((item, i) => {
-        return <MenuItem key={i} value={item}>{item}</MenuItem>
-    })
-
-
-
     const [holding, setHolding] = React.useState('');
     const [zakazchik, setZakazchik] = React.useState('');
     const handleChangeHolding = (event) => {
@@ -52,8 +38,13 @@ const Filters = () => {
                         onChange={handleChangeHolding}
                         sx={{color: mode === "dark" ? palette.white : palette.black,}}
                     >
-                        <MenuItem value=""><em>Пусто</em></MenuItem>
-                        {renderSelectHolding}
+                        <MenuItem value=""><em>Не выбран</em></MenuItem>
+                        {
+                            selectHolding.map((item, i) => {
+                                let x = item === '' ? 'Не указан' : item
+                                return <MenuItem key={i} value={item}>{x}</MenuItem>
+                            })
+                        }
                     </Select>
                 </FormControl>
                 <FormControl sx={{m:1, width: 300}} variant="standard">
@@ -65,8 +56,12 @@ const Filters = () => {
                         onChange={handleChangeZakazchik}
                         sx={{color: mode === "dark" ? palette.white : palette.black}}
                     >
-                        <MenuItem value=""><em>Пусто</em></MenuItem>
-                        {renderSelectKontragent}
+                        <MenuItem value=""><em>Не выбран</em></MenuItem>
+                        {
+                            filteredKontragentByHolding.map((item, i) => {
+                            return <MenuItem key={i} value={item}>{item}</MenuItem>
+                            })
+                        }
                     </Select>
                 </FormControl>
             </Box>

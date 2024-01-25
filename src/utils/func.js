@@ -1,10 +1,12 @@
-export const prepareSelect = (data, param, filter = '') =>{
+
+
+export const prepareSelect = (data, param, filtBy = false) =>{
     let changedData = data
-    if (filter) {
-        changedData = data.filter((i)=>{
-            return i !== filter
-        })
+    console.log(param, filtBy)
+    if (filtBy) {
+        changedData = data.filter((i)=> i.Холдинг == filtBy )
     }
+    console.log(changedData)
     let x = []
     changedData?.forEach(i => {
         if (!x.includes(i[param])){
