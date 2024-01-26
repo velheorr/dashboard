@@ -5,11 +5,11 @@ import "slick-carousel/slick/slick-theme.css";
 import './slider.scss'
 import {settings} from "./sliderSettings";
 
-const SimpleSlider = () => {
+const SimpleSlider = ({data}) => {
         return (
             <>
                 <Slider {...settings}>
-                    <div> <h3>1</h3></div>
+                    <div>{data}</div>
                     <div><h3>2</h3></div>
                     <div><h3>3</h3></div>
                     <div><h3>4</h3></div>

@@ -43,7 +43,7 @@ const Main = () => {
 		<div className='main'>
 			<Filters  />
 			<Typography sx={{textAlign: 'center'}} variant="h6">Список объектов</Typography>
-			<SimpleSlider/>
+			<SimpleSlider data={<Chart/>}/>
 
 			<Chart/>
 
