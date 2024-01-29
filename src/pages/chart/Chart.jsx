@@ -24,9 +24,9 @@ const Chart = () => {
 
 
 	return (
-		<>
-			<ResponsiveContainer width="100%" height="100%" style={{width: '100px', height: '100px'}}>
-				<BarChart width={150} height={40} data={dataW}
+		<div style={{ position: "relative", height: "100%" }}>
+			<ResponsiveContainer width={700} height="80%" minWidth={100} minHeight={100}>
+				<BarChart width={300} height={500} data={dataW}
 						  layout="vertical"
 				>
 					<XAxis  type="number" />
@@ -49,7 +49,7 @@ const Chart = () => {
 				</BarChart>
 			</ResponsiveContainer>
 
-		</>
+		</div>
 	);
 };
 

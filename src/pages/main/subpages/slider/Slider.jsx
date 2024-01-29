@@ -9,8 +9,8 @@ const SimpleSlider = ({data}) => {
         return (
             <>
                 <Slider {...settings}>
-                    <div>{data}</div>
-                    <div><h3>2</h3></div>
+{/*                    <div>{data}</div>*/}
+               {/*     <div><h3>2</h3></div>
                     <div><h3>3</h3></div>
                     <div><h3>4</h3></div>
                     <div><h3>5</h3></div>
@@ -20,7 +20,7 @@ const SimpleSlider = ({data}) => {
                     <div><h3>9</h3></div>
                     <div><h3>10</h3></div>
                     <div><h3>9</h3></div>
-                    <div><h3>10</h3></div>
+                    <div><h3>10</h3></div>*/}
                 </Slider>
             </>
         );
