@@ -16,11 +16,11 @@ const Chart = () => {
 			uv: 78,
 		},
 		{
-			name: 'процентование предьявлено',
+			name: 'Процентование предьявлено',
 			uv: 24,
 		},
 		{
-			name: 'процентование принято',
+			name: 'Процентование принято',
 			uv: 12,
 		},
 
@@ -35,14 +35,15 @@ const Chart = () => {
 					height={300}
 					data={data}
 					layout="vertical"
+					barSize={90}
 				>
 					<CartesianGrid strokeDasharray="3 3" />
 					<XAxis type="number" />
-					<YAxis dataKey="name" type='category' />
+					<YAxis dataKey="name" type='category' width={100}  style={{ fontSize: "13px"}}/>
 					<Tooltip />
 					<Bar dataKey="uv" >
 						{data.map((entry, index) => (
-							<Cell cursor="pointer" fill={entry.uv > 100 ? '#82ca9d' : '#6664d8'} key={`cell-${index}`} />
+							<Cell cursor="pointer" fill={entry.uv > 100 ? '#82ca9d' : '#6664d8'} key={`cell-${index}`} interval={0}/>
 						))}
 					</Bar>
 					{/*<Bar dataKey="uv" fill="#8857d8" />*/}
