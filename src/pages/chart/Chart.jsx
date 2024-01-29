@@ -2,41 +2,56 @@ import React from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, LabelList,Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const Chart = () => {
-	const dataW = [
+	const data = [
 		{
-			name: 'Page A',
-			uv: 4000,
+			name: 'Обьем работ',
+			uv: 152,
 		},
 		{
-			name: 'Page B',
-			uv: 3000,
+			name: 'Сроки контракта',
+			uv: 100,
 		},
 		{
-			name: 'Page C',
-			uv: 2000,
+			name: 'Наличие материалов',
+			uv: 78,
 		},
 		{
-			name: 'Page D',
-			uv: 2780,
+			name: 'процентование предьявлено',
+			uv: 24,
+		},
+		{
+			name: 'процентование принято',
+			uv: 12,
 		},
 
 	];
 
 
 	return (
-		<div style={{ position: "relative", height: "100%" }}>
-			<ResponsiveContainer width={700} height="80%" minWidth={100} minHeight={100}>
-				<BarChart width={300} height={500} data={dataW}
-						  layout="vertical"
+		<div style={{ position: "relative", height: "500px" }}>
+			<ResponsiveContainer width={700} height="80%" minWidth={100} minHeight={100} >
+				<BarChart
+					width={500}
+					height={300}
+					data={data}
+					layout="vertical"
 				>
-					<XAxis  type="number" />
+					<CartesianGrid strokeDasharray="3 3" />
+					<XAxis type="number" />
 					<YAxis dataKey="name" type='category' />
 					<Tooltip />
-					<Bar dataKey="uv">
-						<Cell key='ddfgdfg'  fill='#8857d8'/>
-						<Cell key='ddfggdfg'  fill='#8833d8'/>
-						<Cell key='ddwfgdfg' fill='#4733d8'/>
-						<Cell key='d3dfgdfg'  fill='#5633d8'/>
+					<Bar dataKey="uv" >
+						{data.map((entry, index) => (
+							<Cell cursor="pointer" fill={entry.uv > 100 ? '#82ca9d' : '#6664d8'} key={`cell-${index}`} />
+						))}
+					</Bar>
+					{/*<Bar dataKey="uv" fill="#8857d8" />*/}
+					{/*<Bar dataKey="uv">
+						<Cell key={data.name[0]}  fill='#8857d8'/>
+						<Cell key={data.name[1]}  fill='#8833d8'/>
+						<Cell key={data.name[2]} fill='#4733d8'/>
+						<Cell key={data.name[3]}  fill='#5633d8'/>
+						<Cell key={data.name[4]}  fill='#1233d8'/>
 						<LabelList
 							dataKey="name"
 							fill="#FFF"
@@ -45,7 +60,7 @@ const Chart = () => {
 								return label > 3 ? label : null;
 							}}
 						/>
-					</Bar>
+					</Bar>*/}
 				</BarChart>
 			</ResponsiveContainer>
 

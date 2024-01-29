@@ -63,11 +63,6 @@ const Main = () => {
 						:dataFromDB?.map((item, i) => {
 							return <Charts item={item} key={i}/>
 						})
-					  /*dataFromDB.map((item, i) => {
-							<div key={i}>
-								<div>{item.НаименованиеОбъекта}</div>
-							</div>
-						})*/
 				}
 
 			</Slider>
@@ -90,7 +85,10 @@ const Main = () => {
 export default Main;
 
 const Charts = ({item})=>{
-	return	<Paper elevation={3} sx={{display: 'inline-block', width: '50%'}} >
-		<div>{item.НаименованиеОбъекта}</div>
-	</Paper>
+	console.log(item)
+	return	<div style={{display: 'inline-block', width: '50%'}} >
+		<div style={{boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)', margin: '5px'}}>
+			<div>{item.НаименованиеОбъекта}</div>
+		</div>
+	</div>
 }
