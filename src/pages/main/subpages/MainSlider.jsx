@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {settings} from "./slider/sliderSettings";
+import {settings} from "../../../elements/slider/sliderSettings";
 import Slider from "react-slick";
 import {useSelector} from "react-redux";
 import {Bar, BarChart, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
