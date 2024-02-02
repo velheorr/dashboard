@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import {palette} from "../../../utils/theme";
 import {useDispatch, useSelector} from "react-redux";
-import {setFilteredKontragentByHolding} from "../MainSlice";
+import {setFilteredDatabyKontragentChart, setFilteredKontragentByHolding} from "../MainSlice";
 import {prepareSelect} from "../../../utils/func";
 
 const Filters = () => {
@@ -11,18 +11,43 @@ const Filters = () => {
     const selectKontragent = useSelector(state => state.mainData.selectKontragent);
     const filteredKontragentByHolding = useSelector(state => state.mainData.filteredKontragentByHolding);
     const dataFromDB = useSelector(state => state.mainData.dataFromDB);
+    const filteredDatabyKontragentChart = useSelector(state => state.mainData.filteredDatabyKontragentChart);
 
     const dispatch = useDispatch();
 
     const [holding, setHolding] = React.useState('');
     const [zakazchik, setZakazchik] = React.useState('');
+
+
+    const filterDataChart = (data, byHolding = false, byKontragent = false,) => {
+        let dataFilterChart = [];
+        const datafilter = (by, obj, target)=> {
+            return  by.filter(item => item[obj] === target)
+        }
+        if (byHolding) {
+            dataFilterChart = datafilter(data, 'Холдинг', byHolding)
+        }
+        if (byKontragent) {
+            dataFilterChart = datafilter(dataFilterChart.length > 0 ? dataFilterChart : data, 'Контрагент', byKontragent)
+        }
+
+        dispatch(setFilteredDatabyKontragentChart(dataFilterChart))
+    }
+
+
     const handleChangeHolding = (event) => {
         dispatch(setFilteredKontragentByHolding(prepareSelect(dataFromDB, 'Контрагент', event.target.value)))
         setHolding(event.target.value);
+        /*const dataFilterChart = dataFromDB.filter(item => item.Холдинг === event.target.value)
+        dispatch(setFilteredDatabyKontragentChart(dataFilterChart))*/
+        filterDataChart(dataFromDB, event.target.value, false)
     };
     const handleChangeZakazchik = (event) => {
         setHolding(dataFromDB.find(item => item.Контрагент === event.target.value).Холдинг)
         setZakazchik(event.target.value);
+        /*const dataFilterChart = filteredDatabyKontragentChart.filter(item => item.Контрагент === event.target.value)
+        dispatch(setFilteredDatabyKontragentChart(dataFilterChart))*/
+        filterDataChart(dataFromDB, false, event.target.value)
     };
 
 

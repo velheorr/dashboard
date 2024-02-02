@@ -6,7 +6,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {Filters} from "./subpages/Filters";
 import {Typography} from "@mui/material";
 
-import {getData, setFilteredKontragentByHolding, setHoldings, setKontragent} from "./MainSlice";
+import {
+	getData,
+	setFilteredDatabyKontragentChart,
+	setFilteredKontragentByHolding,
+	setHoldings,
+	setKontragent
+} from "./MainSlice";
 import {useGetQuery} from "../../hook/useGetQuery";
 import {prepareSelect} from "../../utils/func";
 import {settings} from "../../elements/slider/sliderSettings";
@@ -17,6 +23,7 @@ import '../../elements/slider/slider.scss'
 
 const Main = () => {
 	const dataFromDB = useSelector(state => state.mainData.dataFromDB);
+	const filteredDatabyKontragentChart = useSelector(state => state.mainData.filteredDatabyKontragentChart);
 	const dispatch = useDispatch();
 	const {data, isLoading, isError} = useGetQuery()
 
@@ -26,7 +33,7 @@ const Main = () => {
 			 dispatch(setHoldings(prepareSelect(dataFromDB, 'Холдинг')))
 			 dispatch(setKontragent(prepareSelect(dataFromDB, 'Контрагент')))
 			 dispatch(setFilteredKontragentByHolding(prepareSelect(dataFromDB, 'Контрагент')))
-
+			 dispatch(setFilteredDatabyKontragentChart(dataFromDB))
 		}
 	}, [data, dataFromDB])
 
@@ -35,14 +42,14 @@ const Main = () => {
 	if (isError) {return <h3>error</h3>}
 	if (!data) {return <h3>no data</h3>}
 
-	const renderCharts = () => {
+	/*const renderCharts = () => {
 		const x = []
 		dataFromDB?.map((item, i) => {
 			x.push(<Charts item={item} i={i}/>)
 		})
 		return x
 	}
-	const charts= renderCharts()
+	const charts= renderCharts()*/
 
 	return (
 		<div className='main'>
@@ -53,14 +60,12 @@ const Main = () => {
 				{
 					isLoading
 						? <div>Нет данных</div>
-						:dataFromDB?.map((item, i) => {
+						:filteredDatabyKontragentChart?.map((item, i) => {
 							return <Charts item={item} key={i}/>
 						})
 				}
 			</Slider>
-			{/*<MainSlider/>
 
-			<SimpleSlider data={<Chart/>}/>*/}
 		</div>
 	);
 };

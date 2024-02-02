@@ -20,6 +20,7 @@ const initialState = {
     selectHolding: [],
     selectKontragent: [],
     filteredKontragentByHolding: [],
+    filteredDatabyKontragentChart: [],
 }
 
 const mainSlice = createSlice({
@@ -38,6 +39,9 @@ const mainSlice = createSlice({
         setFilteredKontragentByHolding: (state,action) => {
             state.filteredKontragentByHolding = action.payload
         },
+        setFilteredDatabyKontragentChart: (state,action) => {
+            state.filteredDatabyKontragentChart = action.payload
+        },
     },
     extraReducers: (builder) => {
 /*        builder
@@ -51,5 +55,5 @@ const {actions, reducer} = mainSlice;
 
 export default reducer;
 export const {
-    getData,setHoldings, setKontragent,setFilteredKontragentByHolding
+    getData,setHoldings, setKontragent,setFilteredKontragentByHolding, setFilteredDatabyKontragentChart
 } = actions;

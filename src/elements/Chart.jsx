@@ -8,17 +8,16 @@ import {
 	CartesianGrid,
 	Tooltip,
 	ResponsiveContainer,
-	ReferenceLine, Label, LabelList
+	ReferenceLine, Label,
 } from 'recharts';
 
 const Chart = ({item}) => {
-	/*const {ОбъемРабот, СрокиКонтракта, НаличиеМатериалов, ПроцентПредъявленныхРТИУ, ПроцентПринятыхРТИУ, ...items} = {item};
-	console.log(ОбъемРабот)*/
 	let data = []
 	const checkNum = (num) => {
-		if (num > 125){
+		return num > 125 ? 125 : num
+		/*if (num > 125){
 			return 125
-		} else {return num}
+		} else {return num}*/
 	}
 
 	if (item){
@@ -68,16 +67,18 @@ const Chart = ({item}) => {
 	const CustomLabel = (props) =>{
 		const {x, y, name, width} = props;
 		let find = data.find(num => num.name ===  name).realNumber
+		let countWidth = width
+		/*width < 20 ? countWidth = countWidth + 10 : countWidth = countWidth - 20*/
 		if (width < 20){
-			return <text x={x} y={y} dy={28} dx={width + 10} fill={'black'} fontSize={14} textAnchor="middle">{find}</text>
+			countWidth = countWidth + 10
 		} else {
-			return <text x={x} y={y} dy={28} dx={width - 20} fill={'black'} fontSize={14} textAnchor="middle">{find}</text>
+			countWidth = countWidth - 20
 		}
+		return <text x={x} y={y} dy={28} dx={countWidth} fill={'black'} fontSize={14} textAnchor="middle">{find}</text>
 	};
 
 	return (
 		<div style={{ position: "relative", padding: '5px'}}>
-			{/*width={700} height="80%"*/}
 			<ResponsiveContainer width={'100%'}  height={300} minWidth={100} minHeight={100} >
 				<BarChart
 					width={500}
@@ -93,11 +94,8 @@ const Chart = ({item}) => {
 					<Tooltip dataKey="uv" content={<CustomTooltip/>}/>
 					{/*<Bar dataKey="uv"  label={{ position: 'insideRight', fill: 'white', offset: '10'}}>*/}
 					<Bar dataKey="uv"  label={<CustomLabel />}>
-
-					{/*<Bar dataKey="uv"  >*/}
 						{data.map((entry, index) => (
 							<Cell cursor="pointer" fill={entry.realNumber > 100 ? '#F60209' : '#7C7C7C'} key={`cell-${index}`} interval={0} />
-
 						))}
 					</Bar>
 					<ReferenceLine x={100} stroke="black"    strokeWidth={2}>
@@ -105,7 +103,6 @@ const Chart = ({item}) => {
 					</ReferenceLine>
 				</BarChart>
 			</ResponsiveContainer>
-
 		</div>
 	);
 };
