@@ -4,11 +4,11 @@ import Chart from "../../elements/Chart";
 import './main.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {Filters} from "./subpages/Filters";
-import {Typography} from "@mui/material";
+import {Tooltip, Typography} from "@mui/material";
 
 import {
 	getData,
-	setFilteredDatabyKontragentChart,
+	setFilteredDataChart,
 	setFilteredKontragentByHolding,
 	setHoldings,
 	setKontragent
@@ -33,7 +33,7 @@ const Main = () => {
 			 dispatch(setHoldings(prepareSelect(dataFromDB, 'Холдинг')))
 			 dispatch(setKontragent(prepareSelect(dataFromDB, 'Контрагент')))
 			 dispatch(setFilteredKontragentByHolding(prepareSelect(dataFromDB, 'Контрагент')))
-			 dispatch(setFilteredDatabyKontragentChart(dataFromDB))
+			 dispatch(setFilteredDataChart(dataFromDB))
 		}
 	}, [data, dataFromDB])
 
@@ -42,14 +42,6 @@ const Main = () => {
 	if (isError) {return <h3>error</h3>}
 	if (!data) {return <h3>no data</h3>}
 
-	/*const renderCharts = () => {
-		const x = []
-		dataFromDB?.map((item, i) => {
-			x.push(<Charts item={item} i={i}/>)
-		})
-		return x
-	}
-	const charts= renderCharts()*/
 
 	return (
 		<div className='main'>
@@ -75,8 +67,9 @@ export default Main;
 const Charts = ({item})=>{
 	return	<div style={{display: 'inline-block', width: '50%'}} >
 		<div style={{boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)', margin: '5px'}}>
-			{/*<div>{item.НаименованиеОбъекта}</div>*/}
-			<Typography sx={{mt: 2}} align='center' variant="h6" gutterBottom>{item.НаименованиеОбъекта}</Typography>
+			<Tooltip title={item.НаименованиеОбъекта} size="large">
+				<Typography sx={{mt: 2, pl: 1, pr: 1}} noWrap  align='center' variant="h6" gutterBottom>{item.НаименованиеОбъекта}</Typography>
+			</Tooltip>
 			<Chart item={item}/>
 		</div>
 	</div>
