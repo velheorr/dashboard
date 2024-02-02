@@ -68,11 +68,11 @@ const Chart = ({item}) => {
 					barSize={90}
 				>
 					<CartesianGrid strokeDasharray="3 3" />
-					<XAxis type="number" dataKey={data.uv} allowDataOverflow={true} domain={[0, dataMax => (125)]}/>
+					{/*allowDataOverflow={true}*/}
+					<XAxis type="number" dataKey={data.uv}  domain={[0, dataMax => (125)]} scale={'linear'}/>
 					<YAxis dataKey="name" type='category' width={100}  style={{ fontSize: "13px"}}/>
-
 					<Tooltip content={<CustomTooltip/>}/>
-					<Bar dataKey="uv"  label={{ position: 'insideLeft', fill: 'white', offset: '10'}}>
+					<Bar dataKey="uv"  label={{ position: 'insideRight', fill: 'white', offset: '10'}}>
 						{data.map((entry, index) => (
 							<Cell cursor="pointer" fill={entry.uv > 100 ? '#F60209' : '#7C7C7C'} key={`cell-${index}`} interval={0} />
 						))}
