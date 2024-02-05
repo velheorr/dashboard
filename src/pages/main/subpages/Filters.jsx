@@ -62,7 +62,6 @@ const Filters = () => {
                         onChange={handleChangeHolding}
                         sx={{color: mode === "dark" ? palette.white : palette.black,}}
                     >
-                        {/*<MenuItem value="X"><em>Не выбран</em></MenuItem>*/}
                         {
                             selectHolding.map((item, i) => {
                                 let x = item === '' ? 'Не указан' : item
@@ -80,7 +79,6 @@ const Filters = () => {
                         onChange={handleChangeZakazchik}
                         sx={{color: mode === "dark" ? palette.white : palette.black}}
                     >
-                        {/*<MenuItem value="X"><em>Не выбран</em></MenuItem>*/}
                         {
                             filteredKontragentByHolding.map((item, i) => {
                                 return <MenuItem key={i} value={item}>{item}</MenuItem>

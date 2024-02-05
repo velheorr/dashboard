@@ -34,7 +34,6 @@ const Login = () => {
     });
 
     const onSubmit = (data) => {
-        /*console.log(data)*/
         signIn('user', ()=> navigate(fromPage, {replace: true}));
     }
 
