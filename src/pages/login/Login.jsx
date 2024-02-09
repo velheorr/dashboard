@@ -11,6 +11,8 @@ import {palette} from "../../utils/theme";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {loginSchema} from "./verify";
 
+
+
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -38,7 +40,7 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className='lionBG'>
             <div className='loginContainer'>
                 <Box className='box'>
                     <div>
@@ -76,7 +78,7 @@ const Login = () => {
                 </Box>
             </div>
 
-        </>
+        </div>
     );
 };
 

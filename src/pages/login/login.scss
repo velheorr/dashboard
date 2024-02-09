@@ -1,5 +1,14 @@
+
+
+.lionBG {
+  background-image: url('../../img/back.png');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .loginContainer {
-  background-color: #dcdcdc;
+  /*background-color: #dcdcdc;*/
   font-family: DINCyr,Arial,sans-serif!important;
   height: 100vh;
   display: flex;
