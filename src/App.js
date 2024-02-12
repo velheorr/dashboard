@@ -14,6 +14,7 @@ import {themeMode} from "./utils/theme";
 import {useSelector} from "react-redux";
 import {Register} from "./pages/login/Register";
 import {ResetPassword} from "./pages/login/ResetPassword";
+import DetailedView from "./pages/main/subpages/DetailedView";
 
 function App() {
 
@@ -34,11 +35,10 @@ function App() {
                     <Route path='resetPassword' element={<ResetPassword/>}/>
                     <Route path='*' element={<Page404/>}/>
                     <Route path='/' element={<Layout/>}>
-                        <Route index element={
-                            <RequireAuth>
-                                <Main/>
-                            </RequireAuth>
-                        }/>
+                        <Route index element={<RequireAuth><Main/></RequireAuth>}/>
+                        <Route  path='/detailedView' element={<RequireAuth><DetailedView /></RequireAuth>}/>
+
+
                         <Route path='counter'  element={
                             <RequireAuth>
                                 <Counter/>

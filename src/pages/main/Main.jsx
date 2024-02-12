@@ -20,8 +20,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../elements/slider/slider.scss'
+import {Link} from "react-router-dom";
+import {palette} from "../../utils/theme";
+import ChartBlocks from "./subpages/ChartBlocks";
+
 
 const Main = () => {
+
 	const dataFromDB = useSelector(state => state.mainData.dataFromDB);
 	const filteredDatabyKontragentChart = useSelector(state => state.mainData.filteredDatabyKontragentChart);
 	const dispatch = useDispatch();
@@ -53,7 +58,7 @@ const Main = () => {
 					isLoading
 						? <div>Нет данных</div>
 						:filteredDatabyKontragentChart?.map((item, i) => {
-							return <Charts item={item} key={i}/>
+							return <ChartBlocks item={item} key={i}/>
 						})
 				}
 			</Slider>
@@ -64,13 +69,4 @@ const Main = () => {
 
 export default Main;
 
-const Charts = ({item})=>{
-	return	<div style={{display: 'inline-block', width: '50%'}} >
-		<div style={{boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)', margin: '5px'}}>
-			<Tooltip title={item.НаименованиеОбъекта} size="large">
-				<Typography sx={{mt: 2, pl: 1, pr: 1}} noWrap  align='center' variant="h6" gutterBottom>{item.НаименованиеОбъекта}</Typography>
-			</Tooltip>
-			<Chart item={item}/>
-		</div>
-	</div>
-}
+

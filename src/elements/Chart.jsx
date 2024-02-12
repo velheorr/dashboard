@@ -10,6 +10,8 @@ import {
 	ResponsiveContainer,
 	ReferenceLine, Label,
 } from 'recharts';
+import {useSelector} from "react-redux";
+import {palette} from "../utils/theme";
 
 const Chart = ({item}) => {
 	let data = []
@@ -18,6 +20,10 @@ const Chart = ({item}) => {
 		/*if (num > 125){
 			return 125
 		} else {return num}*/
+	}
+	const mode = useSelector(state => state.header.mode);
+	const colorTheme = () => {
+		return mode === "dark" ? palette.white : palette.black
 	}
 
 	if (item){
@@ -56,7 +62,7 @@ const Chart = ({item}) => {
 		if (active && payload && payload.length) {
 			let newLabel = payload[0]?.payload.realNumber || payload[0].value
 			return (
-				<div className="custom-tooltip">
+				<div className="custom-tooltip" style={{color: colorTheme()}}>
 					<p className="label">{`${x}: ${newLabel}%`}</p>
 				</div>
 			);
@@ -74,8 +80,10 @@ const Chart = ({item}) => {
 		} else {
 			countWidth = countWidth - 20
 		}
-		return <text x={x} y={y} dy={28} dx={countWidth} fill={'black'} fontSize={14} textAnchor="middle">{find}</text>
+		return <text x={x} y={y} dy={28} dx={countWidth} fill={colorTheme()} fontSize={14} textAnchor="middle">{find}</text>
 	};
+
+
 
 	return (
 		<div style={{ position: "relative", padding: '5px'}}>
@@ -89,8 +97,8 @@ const Chart = ({item}) => {
 				>
 					<CartesianGrid strokeDasharray="3 3" />
 					{/*allowDataOverflow={true}  dataKey={data.uv}*/}
-					<XAxis type="number" dataKey='uv'  domain={[0, dataMax => (125)]} scale={'linear'}/>
-					<YAxis dataKey="name" type='category' width={100}  style={{ fontSize: "13px"}}/>
+					<XAxis type="number" dataKey='uv'  domain={[0, dataMax => (125)]} scale={'linear'} tick={{ fill: colorTheme()}}/>
+					<YAxis dataKey="name" type='category' width={100}  style={{ fontSize: "13px"}} tick={{ fill: colorTheme()}}/>
 					<Tooltip dataKey="uv" content={<CustomTooltip/>}/>
 					{/*<Bar dataKey="uv"  label={{ position: 'insideRight', fill: 'white', offset: '10'}}>*/}
 					<Bar dataKey="uv"  label={<CustomLabel />}>
