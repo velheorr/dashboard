@@ -32,45 +32,6 @@ const DetailedView = () => {
 
     console.log(currentItem)
 
-    const refactorObj = {
-        АМГ: "Кряжевских А.В.",
-        ВыработкаВРублях: 129,
-        ДатаОкончанияКонтракта: "2023-12-01T00:00:00",
-        ЗапроцентованоФакт: 67680612.24,
-        КодОбъекта: "14083    ",
-        КоличествоИТРПлан: 1,
-        КоличествоИТРФакт: 1,
-        КоличествоПерсоналаПлан: 16,
-        КоличествоПерсоналаФакт: 5,
-        Контрагент: "Метафракс Кемикалс",
-        КоэфСложностиПлан: 1.02,
-        КоэфСложностиФакт: 1.91,
-        КоэфЭффективностиПлан: 1,
-        КоэфЭффективностиФакт: 0.09,
-        НаименованиеОбъекта: "2023 СМР ИТСО основной площадки",
-        НаличиеМатериалов: 54,
-        ОбъемРабот: 126,
-        ПроцентПредъявленныхРТИУ: 96,
-        ПроцентПринятыхРТИУ: 79,
-        РП: "Кряжевских Александр Владимирович",
-        СрокиКонтракта: 128,
-        СуммаКонтракта: 70770102.55,
-        Холдинг: "МЕТАФРАКС",
-    }
-
-    const buildData = (data) => {
-        const dataText = {
-            /*"Коэффициент сложности Объекта:": [КоэфСложностиФакт, КоэфСложностиПлан],*/
-            "Коэффициент сложности Объекта:": 546465465,
-            "Коэффициент эффективности:": 1,
-            "Количество персонала на объекте:": 1,
-            "Количество ИТР на объекте:": 1,
-            "Запроцентовано, руб:": 1
-        }
-        return dataText[data]
-    }
-
-
     const formatAmount = (item) => {
         /*return new Intl.NumberFormat("ru").format(item)*/
         return new Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(item);
@@ -104,11 +65,20 @@ const DetailedView = () => {
         return color
     }
 
-    formatColor(.2, 1, 'zaprocentovano')
 
     return (
         <div className='main'>
-            <Button onClick={() => navigate('/')} variant="outlined" color="success" size='small' startIcon={<ArrowBackIcon />}>Назад</Button>
+            <div className='topTitle'>
+                <div><Button onClick={() => navigate('/')} variant="outlined" color="success" size='small' startIcon={<ArrowBackIcon />}>Назад</Button></div>
+                <Typography sx={{pr: 1, color: mode === "dark" ? palette.white : palette.black}}
+                            noWrap
+                            align='right'
+                            variant="subtitle1"
+                            gutterBottom>
+                    {currentItem.Холдинг} / {currentItem.Контрагент}
+                </Typography>
+            </div>
+
             <BlockShadow>
                 <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black}}
                             noWrap
