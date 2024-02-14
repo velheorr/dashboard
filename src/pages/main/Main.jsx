@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react';
-import Chart from "../../elements/Chart";
-
 import './main.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {Filters} from "./subpages/Filters";
-import {Tooltip, Typography} from "@mui/material";
+import { Typography} from "@mui/material";
 
 import {
 	getData,
@@ -20,13 +18,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../elements/slider/slider.scss'
-import {Link} from "react-router-dom";
-import {palette} from "../../utils/theme";
 import ChartBlocks from "./subpages/ChartBlocks";
 
 
 const Main = () => {
-
 	const dataFromDB = useSelector(state => state.mainData.dataFromDB);
 	const filteredDatabyKontragentChart = useSelector(state => state.mainData.filteredDatabyKontragentChart);
 	const dispatch = useDispatch();

@@ -4,11 +4,10 @@ import {useSelector} from "react-redux";
 
 const BlockShadow = ({children}) => {
     const mode = useSelector(state => state.header.mode);
-
-
+    const theme = `blockShadow ${mode === 'dark'? 'dark': ''}`
 
     return (
-        <div className='blockShadow'>
+        <div className={theme}>
             {children}
         </div>
     );

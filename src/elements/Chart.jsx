@@ -17,9 +17,6 @@ const Chart = ({item}) => {
 	let data = []
 	const checkNum = (num) => {
 		return num > 125 ? 125 : num
-		/*if (num > 125){
-			return 125
-		} else {return num}*/
 	}
 	const mode = useSelector(state => state.header.mode);
 	const colorTheme = () => {
@@ -106,7 +103,8 @@ const Chart = ({item}) => {
 							<Cell cursor="pointer" fill={entry.realNumber > 100 ? '#F60209' : '#7C7C7C'} key={`cell-${index}`} interval={0} />
 						))}
 					</Bar>
-					<ReferenceLine x={100} stroke="black"    strokeWidth={2}>
+					{/*<ReferenceLine x={100} stroke="black"  strokeWidth={2}>*/}
+					<ReferenceLine x={100} stroke={colorTheme()}  strokeWidth={2}>
 						<Label value="100" offset={-18} position="insideBottom" />
 					</ReferenceLine>
 				</BarChart>

@@ -33,8 +33,8 @@ const DetailedView = () => {
     console.log(currentItem)
 
     const formatAmount = (item) => {
-        /*return new Intl.NumberFormat("ru").format(item)*/
-        return new Intl.NumberFormat("ru", {style: "currency", currency: "RUB"}).format(item);
+        let x = Math.round(item)
+        return new Intl.NumberFormat("ru", {style: "currency", currency: "RUB", minimumFractionDigits: 0}).format(x);
     }
     const formatColor = (fact, plan, rule = false) =>{
         let x = (fact * 100) / plan
@@ -69,7 +69,7 @@ const DetailedView = () => {
     return (
         <div className='main'>
             <div className='topTitle'>
-                <div><Button onClick={() => navigate('/')} variant="outlined" color="success" size='small' startIcon={<ArrowBackIcon />}>Назад</Button></div>
+                <div><Button onClick={() => navigate('/')} variant="contained" color="success" size='small' startIcon={<ArrowBackIcon />}>Назад</Button></div>
                 <Typography sx={{pr: 1, color: mode === "dark" ? palette.white : palette.black}}
                             noWrap
                             align='right'
@@ -99,21 +99,21 @@ const DetailedView = () => {
                 </Typography>
                 {currentItem?
                     <List>
-                        <CustomItem name="Коэффициент сложности Объекта:" value={`${currentItem.КоэфСложностиФакт} | ${currentItem.КоэфСложностиПлан}`}/>
+                        <CustomItem name="Коэффициент сложности Объекта:" value={`${currentItem.КоэфСложностиФакт} / ${currentItem.КоэфСложностиПлан}`}/>
                         <CustomItem name="Коэффициент эффективности:"
-                                    value={`${currentItem.КоэфЭффективностиФакт} | ${currentItem.КоэфЭффективностиПлан}`}
+                                    value={`${currentItem.КоэфЭффективностиФакт} / ${currentItem.КоэфЭффективностиПлан}`}
                                     ifColor={formatColor(currentItem.КоэфЭффективностиФакт, currentItem.КоэфЭффективностиПлан, 'effectivness')}
                         />
                         <CustomItem name="Количество персонала на объекте:"
-                                    value={`${currentItem.КоличествоПерсоналаФакт} | ${currentItem.КоличествоПерсоналаПлан}`}
+                                    value={`${currentItem.КоличествоПерсоналаФакт} / ${currentItem.КоличествоПерсоналаПлан}`}
                                     ifColor={formatColor(currentItem.КоличествоПерсоналаФакт, currentItem.КоличествоПерсоналаПлан, 'personal')}
                         />
                         <CustomItem name="Количество ИТР на объекте:"
-                                    value={`${currentItem.КоличествоИТРФакт} | ${currentItem.КоличествоИТРПлан}`}
+                                    value={`${currentItem.КоличествоИТРФакт} / ${currentItem.КоличествоИТРПлан}`}
                                     ifColor={formatColor(currentItem.КоличествоИТРФакт, currentItem.КоличествоИТРПлан, 'itr')}
                         />
                         <CustomItem name="Запроцентовано, руб:"
-                                    value={`${formatAmount(currentItem.ЗапроцентованоФакт)} | ${formatAmount(currentItem.СуммаКонтракта)}`}
+                                    value={`${formatAmount(currentItem.ЗапроцентованоФакт)} / ${formatAmount(currentItem.СуммаКонтракта)}`}
                                     ifColor={formatColor(currentItem.ЗапроцентованоФакт, currentItem.СуммаКонтракта, 'zaprocentovano')}
                         />
                     </List>
@@ -129,8 +129,8 @@ const DetailedView = () => {
 export default DetailedView;
 
 const CustomItem = ({name, value, ifColor})=> {
-
-    return <ListItem disablePadding divider>
+    const mode = useSelector(state => state.header.mode);
+    return <ListItem disablePadding divider sx={{borderBottom: mode === 'dark' ? '1px solid rgb(255 255 255 / 41%)': ''}}>
         <ListItemButton>
             <ListItemText primary={name} />
             <ListItemText sx={{textAlign: 'end', color: palette[ifColor]}} primary={value} />
