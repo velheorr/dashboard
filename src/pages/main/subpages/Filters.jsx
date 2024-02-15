@@ -56,7 +56,7 @@ const Filters = () => {
         filterDataChart(dataFromDB, false, event.target.value)
     };
 
-
+    const {setModal} = useModal()
 
     return (
         <div>
@@ -94,9 +94,8 @@ const Filters = () => {
                         }
                     </Select>
                 </FormControl>
+                <span style={{float: "right"}}><IconButton onClick={setModal} size="small" sx={{color: palette.grey}}><HelpOutlineIcon /></IconButton></span>
             </Box>
-            <div className='btnModal'><IconButton onClick={()=> dispatch(openModal())} size="small" sx={{color: palette.grey}}><HelpOutlineIcon /></IconButton></div>
-            <div className=''><IconButton onClick={useModal} size="small" sx={{color: palette.grey}}><HelpOutlineIcon /></IconButton></div>
         </div>
     );
 };

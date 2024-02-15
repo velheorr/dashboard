@@ -5,5 +5,7 @@ import {openModal} from "../elements/Modal/ModalSlice";
 export const useModal = ()=> {
     const dispatch = useDispatch()
 
-    return dispatch(openModal())
+    const setModal= () => dispatch(openModal())
+
+    return {setModal}
 }
