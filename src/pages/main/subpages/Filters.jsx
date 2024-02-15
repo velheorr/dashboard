@@ -1,10 +1,17 @@
-import React, {useEffect} from 'react';
-import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import React, {useState} from 'react';
+import '../main.scss'
+import {Box, FormControl, IconButton, InputLabel, MenuItem, Select} from "@mui/material";
 import {palette} from "../../../utils/theme";
 import {useDispatch, useSelector} from "react-redux";
 import {setFilteredDataChart, setFilteredKontragentByHolding} from "../MainSlice";
 import {prepareSelect} from "../../../utils/func";
+import {openModal} from "../../../elements/Modal/ModalSlice";
+import * as PropTypes from "prop-types";
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import {useModal} from "../../../hook/useModal";
 
+
+HelpOutlineIcon.propTypes = {fontSize: PropTypes.string};
 const Filters = () => {
     const mode = useSelector(state => state.header.mode);
     const selectHolding = useSelector(state => state.mainData.selectHolding);
@@ -13,8 +20,8 @@ const Filters = () => {
 
     const dispatch = useDispatch();
 
-    const [holding, setHolding] = React.useState('');
-    const [zakazchik, setZakazchik] = React.useState('');
+    const [holding, setHolding] = useState('');
+    const [zakazchik, setZakazchik] = useState('');
 
     const filterDataChart = (data, byHolding = false, byKontragent = false,) => {
         let dataFilterChart = [];
@@ -48,6 +55,7 @@ const Filters = () => {
         setZakazchik(event.target.value);
         filterDataChart(dataFromDB, false, event.target.value)
     };
+
 
 
     return (
@@ -87,7 +95,8 @@ const Filters = () => {
                     </Select>
                 </FormControl>
             </Box>
-
+            <div className='btnModal'><IconButton onClick={()=> dispatch(openModal())} size="small" sx={{color: palette.grey}}><HelpOutlineIcon /></IconButton></div>
+            <div className=''><IconButton onClick={useModal} size="small" sx={{color: palette.grey}}><HelpOutlineIcon /></IconButton></div>
         </div>
     );
 };

@@ -30,9 +30,7 @@ const DetailedView = () => {
         }
     },[currentItem])
 
-    console.log(currentItem)
-
-    const formatAmount = (item) => {
+     const formatAmount = (item) => {
         let x = Math.round(item)
         return new Intl.NumberFormat("ru", {style: "currency", currency: "RUB", minimumFractionDigits: 0}).format(x);
     }
@@ -47,17 +45,17 @@ const DetailedView = () => {
             },
             itr(){
                 if (x <= 75 || x >= 125) { color = 'red'}
-                else if(x > 75 && x < 90 || x >= 110 && x < 125) { color = 'yellow'}
+                else if( (x > 75 && x < 90) || (x >= 110 && x < 125)) { color = 'yellow'}
                 else if(x >= 90 && x < 110){ color = 'green'}
             },
             personal(){
                 if (x <= 75 || x >= 125) { color = 'red'}
-                else if(x > 75 && x < 90 || x >= 110 && x < 125) { color = 'yellow'}
+                else if((x > 75 && x < 90) || (x >= 110 && x < 125)) { color = 'yellow'}
                 else if(x >= 90 && x < 110){ color = 'green'}
             },
             effectivness(){
                 if (fact <= .69 ) { color = 'red'}
-                else if(fact > 70 && fact < .89 || fact > 1.2) { color = 'yellow'}
+                else if((fact > 70 && fact < .89) || fact > 1.2) { color = 'yellow'}
                 else if(fact > .9 && fact < 1.2){ color = 'green'}
             },
         }
@@ -69,7 +67,7 @@ const DetailedView = () => {
     return (
         <div className='main'>
             <div className='topTitle'>
-                <div><Button onClick={() => navigate('/')} variant="contained" color="success" size='small' startIcon={<ArrowBackIcon />}>Назад</Button></div>
+                <div><Button onClick={() => navigate('/')} variant="contained" sx={{background: palette.green}} color='success' size='small' startIcon={<ArrowBackIcon />}>Назад</Button></div>
                 <Typography sx={{pr: 1, color: mode === "dark" ? palette.white : palette.black}}
                             noWrap
                             align='right'

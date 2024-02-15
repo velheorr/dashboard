@@ -15,6 +15,7 @@ import {useSelector} from "react-redux";
 import {Register} from "./pages/login/Register";
 import {ResetPassword} from "./pages/login/ResetPassword";
 import DetailedView from "./pages/main/subpages/DetailedView";
+import TransitionsModal from "./elements/Modal/Modal";
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
 
                     </Route>
                 </Routes>
+                <TransitionsModal/>
             </ThemeProvider>
         </AuthProvider>
     );
