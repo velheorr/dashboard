@@ -4,7 +4,7 @@ import {
     List,
     ListItem,
     ListItemButton,
-    ListItemText,
+    ListItemText, Tooltip,
     Typography
 } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -97,7 +97,9 @@ const DetailedView = () => {
                 </Typography>
                 {currentItem?
                     <List>
+
                         <CustomItem name="Коэффициент сложности Объекта:" value={`${currentItem.КоэфСложностиФакт} / ${currentItem.КоэфСложностиПлан}`}/>
+
                         <CustomItem name="Коэффициент эффективности:"
                                     value={`${currentItem.КоэфЭффективностиФакт} / ${currentItem.КоэфЭффективностиПлан}`}
                                     ifColor={formatColor(currentItem.КоэфЭффективностиФакт, currentItem.КоэфЭффективностиПлан, 'effectivness')}
@@ -131,7 +133,9 @@ const CustomItem = ({name, value, ifColor})=> {
     return <ListItem disablePadding divider sx={{borderBottom: mode === 'dark' ? '1px solid rgb(255 255 255 / 41%)': ''}}>
         <ListItemButton>
             <ListItemText primary={name} />
-            <ListItemText sx={{textAlign: 'end', color: palette[ifColor]}} primary={value} />
+            <Tooltip title={'sdfsdfgdfsg'} >
+                <ListItemText sx={{textAlign: 'end', color: palette[ifColor]}} primary={value} />
+            </Tooltip>
         </ListItemButton>
     </ListItem>
 }

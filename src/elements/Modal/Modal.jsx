@@ -58,10 +58,10 @@ export default function TransitionsModal() {
                                 <IconButton onClick={handleClose} size="large" sx={{color: palette.white}}><CloseIcon fontSize='inherit'/></IconButton>
                             </div>
                             <Typography id="transition-modal-title" variant="h6" component="h1">
-                                Ebano negro.
+                                ***** negro.
                             </Typography>
                             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                                Ebano negro. Ebano negro. Ebano negro.
+                                123456
                             </Typography>
                         </Box>
                 </Fade>

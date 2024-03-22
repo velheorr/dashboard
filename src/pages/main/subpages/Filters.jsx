@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../main.scss'
-import {Box, FormControl, IconButton, InputLabel, MenuItem, Select} from "@mui/material";
+import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Typography} from "@mui/material";
 import {palette} from "../../../utils/theme";
 import {useDispatch, useSelector} from "react-redux";
 import {setFilteredDataChart, setFilteredKontragentByHolding} from "../MainSlice";
@@ -94,6 +94,13 @@ const Filters = () => {
                         }
                     </Select>
                 </FormControl>
+                <FormControl sx={{m:1, width: 300, verticalAlign: 'bottom', textAlign: 'right'}} >
+                    <Typography sx={{ }} variant="body1">Всего объектов: {filteredKontragentByHolding.length}</Typography>
+                </FormControl>
+
+                {/*<div>
+                    <span>{filteredKontragentByHolding.length}</span>
+                </div>*/}
                 <span style={{float: "right"}}><IconButton onClick={setModal} size="small" sx={{color: palette.grey}}><HelpOutlineIcon /></IconButton></span>
             </Box>
         </div>

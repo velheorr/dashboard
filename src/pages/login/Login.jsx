@@ -10,6 +10,7 @@ import {palette} from "../../utils/theme";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import {loginSchema} from "./verify";
+import axios from "axios";
 
 
 
@@ -36,8 +37,10 @@ const Login = () => {
     });
 
     const onSubmit = (data) => {
+        console.log(data)
         signIn('user', ()=> navigate(fromPage, {replace: true}));
     }
+
 
     return (
         <div className='lionBG'>

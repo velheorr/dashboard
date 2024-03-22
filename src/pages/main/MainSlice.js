@@ -4,14 +4,6 @@ import axios from "axios";
 
 const { REACT_APP_API_1C, REACT_APP_API_MONGO } = process.env;
 
-/*
-export const fetchData = createAsyncThunk('catalog/fetchRepairJSON',async () =>{
-        const res = await axios.get('https://mail.grdn.ru:777/upp_hs_ap/hs/v3/GetBlocSales');
-        console.log(res)
-        return res.data;
-    }
-)
-*/
 
 
 
