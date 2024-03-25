@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {
-    Button,
+    Button, IconButton,
     List,
     ListItem,
     ListItemButton,
@@ -15,6 +15,8 @@ import Chart from "../../../elements/Chart";
 import {useSelector} from "react-redux";
 import BlockShadow from "../../../elements/BlockShadow";
 import {palette} from "../../../utils/theme";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import {useModal} from "../../../hook/useModal";
 
 
 
@@ -63,6 +65,7 @@ const DetailedView = () => {
         return color
     }
 
+    const {setModal} = useModal()
 
     return (
         <div className='main'>
@@ -78,6 +81,8 @@ const DetailedView = () => {
             </div>
 
             <BlockShadow>
+
+                <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectDiagram')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
                 <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black}}
                             noWrap
                             align='center'
@@ -85,9 +90,11 @@ const DetailedView = () => {
                             gutterBottom>
                     {currentItem.НаименованиеОбъекта}
                 </Typography>
+
                 {currentItem? <Chart item={currentItem} variant='detailed'/> : <div>no data</div>}
             </BlockShadow>
             <BlockShadow>
+                <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectParams')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
                 <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black}}
                             noWrap
                             align='center'
@@ -147,8 +154,8 @@ const CustomItem = ({name, value, ifColor, tooltip1, tooltip2})=> {
             <ListItemText primary={name} />
             <Tooltip title={
                 <>
-                    <Typography variant="subtitle2" gutterBottom>{tooltip1}</Typography>
-                    <Typography variant="subtitle2" gutterBottom>{tooltip2}</Typography>
+                    <Typography variant="body2" gutterBottom>{tooltip1}</Typography>
+                    <Typography variant="body2" gutterBottom>{tooltip2}</Typography>
                 </>
             } >
                 <ListItemText sx={{textAlign: 'end', color: palette[ifColor]}} primary={value} />

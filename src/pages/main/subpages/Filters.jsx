@@ -97,11 +97,7 @@ const Filters = () => {
                 <FormControl sx={{m:1, width: 300, verticalAlign: 'bottom', textAlign: 'right'}} >
                     <Typography sx={{ }} variant="body1">Всего объектов: {filteredKontragentByHolding.length}</Typography>
                 </FormControl>
-
-                {/*<div>
-                    <span>{filteredKontragentByHolding.length}</span>
-                </div>*/}
-                <span style={{float: "right"}}><IconButton onClick={setModal} size="small" sx={{color: palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                <span style={{float: "right"}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
             </Box>
         </div>
     );
