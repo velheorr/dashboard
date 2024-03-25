@@ -85,7 +85,7 @@ const DetailedView = () => {
                             gutterBottom>
                     {currentItem.НаименованиеОбъекта}
                 </Typography>
-                {currentItem? <Chart item={currentItem}/> : <div>no data</div>}
+                {currentItem? <Chart item={currentItem} variant='detailed'/> : <div>no data</div>}
             </BlockShadow>
             <BlockShadow>
                 <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black}}
@@ -98,23 +98,35 @@ const DetailedView = () => {
                 {currentItem?
                     <List>
 
-                        <CustomItem name="Коэффициент сложности Объекта:" value={`${currentItem.КоэфСложностиФакт} / ${currentItem.КоэфСложностиПлан}`}/>
+                        <CustomItem name="Коэффициент сложности Объекта:"
+                                    value={`${currentItem.КоэфСложностиФакт} / ${currentItem.КоэфСложностиПлан}`}
+                                    tooltip1={`ПЛАН - это коэффициент усложнения Объекта, предусмотренный Техническим решением.`}
+                                    tooltip2={`ФАКТ - это коэффициент усложнения Объекта по факту выполнения работ.`}
+                        />
 
                         <CustomItem name="Коэффициент эффективности:"
                                     value={`${currentItem.КоэфЭффективностиФакт} / ${currentItem.КоэфЭффективностиПлан}`}
                                     ifColor={formatColor(currentItem.КоэфЭффективностиФакт, currentItem.КоэфЭффективностиПлан, 'effectivness')}
+                                    tooltip1={`ПЛАН - это базовое значение коэффициента эффективности.`}
+                                    tooltip2={`ФАКТ - это коэффициент эффективности организации работ на текущий момент.`}
                         />
                         <CustomItem name="Количество персонала на объекте:"
                                     value={`${currentItem.КоличествоПерсоналаФакт} / ${currentItem.КоличествоПерсоналаПлан}`}
                                     ifColor={formatColor(currentItem.КоличествоПерсоналаФакт, currentItem.КоличествоПерсоналаПлан, 'personal')}
+                                    tooltip1={`ПЛАН - это планируемое количество рабочего персонала (кроме ИТР).`}
+                                    tooltip2={`ФАКТ - это фактическое количество рабочего персонала (кроме ИТР) на текущий момент.`}
                         />
                         <CustomItem name="Количество ИТР на объекте:"
                                     value={`${currentItem.КоличествоИТРФакт} / ${currentItem.КоличествоИТРПлан}`}
                                     ifColor={formatColor(currentItem.КоличествоИТРФакт, currentItem.КоличествоИТРПлан, 'itr')}
+                                    tooltip1={`ПЛАН - это планируемое количество ИТР.`}
+                                    tooltip2={`ФАКТ - это фактическое количество ИТР на текущий момент.`}
                         />
                         <CustomItem name="Запроцентовано, руб:"
                                     value={`${formatAmount(currentItem.ЗапроцентованоФакт)} / ${formatAmount(currentItem.СуммаКонтракта)}`}
                                     ifColor={formatColor(currentItem.ЗапроцентованоФакт, currentItem.СуммаКонтракта, 'zaprocentovano')}
+                                    tooltip1={`ПЛАН - сумма Договора.`}
+                                    tooltip2={`ФАКТ - фактически запроцентованная сумма по Объекту.`}
                         />
                     </List>
                     : <div>no data</div>
@@ -128,12 +140,17 @@ const DetailedView = () => {
 
 export default DetailedView;
 
-const CustomItem = ({name, value, ifColor})=> {
+const CustomItem = ({name, value, ifColor, tooltip1, tooltip2})=> {
     const mode = useSelector(state => state.header.mode);
     return <ListItem disablePadding divider sx={{borderBottom: mode === 'dark' ? '1px solid rgb(255 255 255 / 41%)': ''}}>
         <ListItemButton>
             <ListItemText primary={name} />
-            <Tooltip title={'sdfsdfgdfsg'} >
+            <Tooltip title={
+                <>
+                    <Typography variant="subtitle2" gutterBottom>{tooltip1}</Typography>
+                    <Typography variant="subtitle2" gutterBottom>{tooltip2}</Typography>
+                </>
+            } >
                 <ListItemText sx={{textAlign: 'end', color: palette[ifColor]}} primary={value} />
             </Tooltip>
         </ListItemButton>

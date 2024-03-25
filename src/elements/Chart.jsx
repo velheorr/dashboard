@@ -12,8 +12,9 @@ import {
 } from 'recharts';
 import {useSelector} from "react-redux";
 import {palette} from "../utils/theme";
+import {Typography} from "@mui/material";
 
-const Chart = ({item}) => {
+const Chart = ({item, variant = false}) => {
 	let data = []
 	const checkNum = (num) => {
 		return num > 125 ? 125 : num
@@ -27,26 +28,31 @@ const Chart = ({item}) => {
 		data.push(
 			{
 				name: 'Обьем работ, %',
+				info: 'Трудоёмкость выполненных работ по отношению к общей трудоемкостью работ по Объекту. Например, выполнено 50 нормочасов трудоёмкости из 100 нормочасов.',
 				uv:  checkNum(item.ОбъемРабот),
 				realNumber: item.ОбъемРабот
 			},
 			{
 				name: 'Сроки контракта, %',
+				info: 'Количество прошедших дней по Договору по отношению к общему количеству дней по Договору.',
 				uv:  checkNum(item.СрокиКонтракта),
 				realNumber: item.СрокиКонтракта,
 			},
 			{
 				name: 'Наличие материалов, %',
+				info: 'Стоимость поступивших на Объект материалов по отношению к общей стоимости материалов.',
 				uv: checkNum(item.НаличиеМатериалов),
 				realNumber: item.НаличиеМатериалов,
 			},
 			{
 				name: 'Процентование предьявлено, %',
+				info: 'Сумма выписанных Реализаций по Объекту по отношению к общей сумме Договора.',
 				uv: checkNum(item.ПроцентПредъявленныхРТИУ),
 				realNumber: item.ПроцентПредъявленныхРТИУ,
 			},
 			{
 				name: 'Процентование принято, %',
+				info: 'Сумма подписанных Заказчиком Реализаций по Объекту по отношению к общей сумме Договора.',
 				uv: checkNum(item.ПроцентПринятыхРТИУ),
 				realNumber: item.ПроцентПринятыхРТИУ,
 			},
@@ -58,9 +64,15 @@ const Chart = ({item}) => {
 		let x= label?.slice(0, -3)
 		if (active && payload && payload.length) {
 			let newLabel = payload[0]?.payload.realNumber || payload[0].value
+			let info = payload[0]?.payload.info || null
 			return (
 				<div className="custom-tooltip" style={{color: colorTheme()}}>
-					<p className="label">{`${x}: ${newLabel}%`}</p>
+					<Typography variant="subtitle2" gutterBottom>{`${x}: ${newLabel}%`}</Typography>
+					{
+						variant
+							? <Typography variant="subtitle2" gutterBottom>{info}</Typography>
+							: null
+					}
 				</div>
 			);
 		}
