@@ -71,19 +71,19 @@ const DetailedView = () => {
         <div className='main'>
             <div className='topTitle'>
                 <div><Button onClick={() => navigate('/')} variant="contained" sx={{background: palette.green}} color='success' size='small' startIcon={<ArrowBackIcon />}>Назад</Button></div>
-                <Typography sx={{pr: 1, color: mode === "dark" ? palette.white : palette.black}}
+                <Typography sx={{pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
                             noWrap
                             align='right'
                             variant="subtitle1"
                             gutterBottom>
-                    {currentItem.Холдинг} / {currentItem.Контрагент}
+                    {currentItem.Холдинг} {currentItem.Холдинг ? '/' : null} {currentItem.Контрагент}
                 </Typography>
             </div>
 
             <BlockShadow>
 
                 <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectDiagram')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
-                <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black}}
+                <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
                             noWrap
                             align='center'
                             variant="h6"
@@ -95,7 +95,7 @@ const DetailedView = () => {
             </BlockShadow>
             <BlockShadow>
                 <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectParams')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
-                <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black}}
+                <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
                             noWrap
                             align='center'
                             variant="h6"

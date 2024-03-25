@@ -46,7 +46,7 @@ const Main = () => {
 	return (
 		<div className='main'>
 			<Filters  />
-			<Typography sx={{textAlign: 'center'}} variant="h5">Список объектов</Typography>
+			<Typography sx={{textAlign: 'center', fontWeight: 600}} variant="h5">Список объектов</Typography>
 
 			<Slider {...settings}>
 				{

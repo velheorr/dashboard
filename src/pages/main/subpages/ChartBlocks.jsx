@@ -18,7 +18,7 @@ const ChartBlocks = ({item})=>{
         <div style={{display: 'inline-block', width: '50%'}} >
             <BlockShadow>
                 <Tooltip title={item.НаименованиеОбъекта} size="large">
-                    <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black}}
+                    <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
                                 noWrap
                                 align='center'
                                 variant="h6"

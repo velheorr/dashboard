@@ -49,8 +49,8 @@ const Header = () => {
             <AppBar position="relative" sx={{background: mode === "dark" ? palette.grey[500] : palette.grey[700]}}>
                 <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: '0 !important'}}>
                     <Box className='logo'>
-                        <Typography component="div">GUARDIAN</Typography>
-                        <Typography component="div">DASHBOARD</Typography>
+                        <Typography component="div" sx={{fontWeight: 600}}>GUARDIAN</Typography>
+                        <Typography component="div" sx={{fontWeight: 600}}>DASHBOARD</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-between',
                         color: mode === "dark" ? palette.white : palette.black}}
@@ -60,7 +60,7 @@ const Header = () => {
                             <Typography component="div">{ruDate}</Typography>
                         </Box>
 
-                        <Typography variant="h6" component="div">Главное меню</Typography>
+                        <Typography variant="h6" component="div" sx={{fontWeight: 600}}>Главное меню</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center'}}>
                             <Tooltip title="Настройки светофора" size="large">
                                 <IconButton color={'inherit'}>

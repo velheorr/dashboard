@@ -66,11 +66,12 @@ const Chart = ({item, variant = false}) => {
 			let newLabel = payload[0]?.payload.realNumber || payload[0].value
 			let info = payload[0]?.payload.info || null
 			return (
-				<div className="custom-tooltip" style={{color: colorTheme()}}>
-					<Typography variant="subtitle2" gutterBottom>{`${x}: ${newLabel}%`}</Typography>
+				/*<div className="custom-tooltip" style={{color: colorTheme()}}>*/
+				<div className="custom-tooltip">
+					<Typography variant="subtitle2" gutterBottom color='white'>{`${x}: ${newLabel}%`}</Typography>
 					{
 						variant
-							? <Typography variant="subtitle2" gutterBottom>{info}</Typography>
+							? <Typography variant="subtitle2" gutterBottom color='white'>{info}</Typography>
 							: null
 					}
 				</div>

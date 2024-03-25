@@ -42,7 +42,7 @@ export default function TransitionsModal() {
     switch (variant){
         case 'mainPage':
             modalData =  <>
-                <Typography variant="h6" gutterBottom sx={{textAlign: 'center'}}>Добро пожаловать на GUARDIAN DASHBOARD!</Typography>
+                <Typography variant="h6" gutterBottom sx={{textAlign: 'center', fontWeight: 600}}>Добро пожаловать на GUARDIAN DASHBOARD!</Typography>
                 <Typography variant="body2" gutterBottom>Это Панель Управления, на которой вы можете видеть блоки Объектов с групповыми гистограммами.
                     Каждый блок имеет рамку, которая окрашивается в один из цветов светофора в зависимости от состояния текущих показателей по Объекту.</Typography>
                 <Typography variant="body2" gutterBottom>В верхней левой части Панели Управления находятся фильтры по Холдингу и Заказчику.
