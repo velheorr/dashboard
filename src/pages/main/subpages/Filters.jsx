@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../main.scss'
 import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Typography} from "@mui/material";
 import {palette} from "../../../utils/theme";
 import {useDispatch, useSelector} from "react-redux";
 import {setFilteredDataChart, setFilteredKontragentByHolding} from "../MainSlice";
 import {prepareSelect} from "../../../utils/func";
-import {openModal} from "../../../elements/Modal/ModalSlice";
 import * as PropTypes from "prop-types";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import {useModal} from "../../../hook/useModal";
 
-
 HelpOutlineIcon.propTypes = {fontSize: PropTypes.string};
+
 const Filters = () => {
     const mode = useSelector(state => state.header.mode);
     const selectHolding = useSelector(state => state.mainData.selectHolding);
@@ -22,6 +21,16 @@ const Filters = () => {
 
     const [holding, setHolding] = useState('');
     const [zakazchik, setZakazchik] = useState('');
+    const [amount, setAmount] = useState(0)
+
+
+    useEffect(()=>{
+        if (dataFromDB){
+            setAmount(dataFromDB.length)
+        }
+    }, [dataFromDB])
+
+
 
     const filterDataChart = (data, byHolding = false, byKontragent = false,) => {
         let dataFilterChart = [];
@@ -37,6 +46,7 @@ const Filters = () => {
         if (byKontragent) {
             dataFilterChart = datafilter(dataFilterChart.length > 0 ? dataFilterChart : data, 'Контрагент', byKontragent)
         }
+        setAmount(dataFilterChart.length)
         dispatch(setFilteredDataChart(dataFilterChart))
     }
 
@@ -95,7 +105,7 @@ const Filters = () => {
                     </Select>
                 </FormControl>
                 <FormControl sx={{m:1, width: 300, verticalAlign: 'bottom', textAlign: 'right'}} >
-                    <Typography sx={{ }} variant="body1">Всего объектов: {filteredKontragentByHolding.length}</Typography>
+                    <Typography sx={{ }} variant="body1">Всего объектов: {amount}</Typography>
                 </FormControl>
                 <span style={{float: "right"}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
             </Box>

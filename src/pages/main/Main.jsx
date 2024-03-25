@@ -19,6 +19,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../elements/slider/slider.scss'
 import ChartBlocks from "./subpages/ChartBlocks";
+import Skelet from "../../elements/Skelet";
 
 
 const Main = () => {
@@ -38,13 +39,17 @@ const Main = () => {
 	}, [data, dataFromDB])
 
 
-	if (isLoading) {return <h3>loading...</h3>}
+	if (isLoading) {return <Skelet/>}
 	if (isError) {return <h3>error</h3>}
 	if (!data) {return <h3>no data</h3>}
 
 
 	return (
 		<div className='main'>
+
+
+
+
 			<Filters  />
 			<Typography sx={{textAlign: 'center', fontWeight: 600}} variant="h5">Список объектов</Typography>
 
