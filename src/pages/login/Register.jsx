@@ -37,8 +37,8 @@ const Register = () => {
                 <Box className='box'>
                     <div>
                         <img className='img' src={logo} alt=""/>
-                        <Typography sx={{mt: 2}} align='center' variant="h5" gutterBottom>DASHBOARD</Typography>
-                        <Typography sx={{mt: 2}} align='left' variant="h6" gutterBottom>Регистрация:</Typography>
+                        <Typography sx={{mt: 2, fontWeight: 600}} align='center' variant="h5" gutterBottom>DASHBOARD</Typography>
+                        <Typography sx={{mt: 2, fontWeight: 600}} align='left' variant="h6" gutterBottom>Регистрация:</Typography>
                         <Box
                             onSubmit={handleSubmit(onSubmit)}
                             component="form"

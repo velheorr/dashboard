@@ -1,14 +1,16 @@
 
 
 .lionBG {
-  background-image: url('../../img/back.png');
-  background-position: right;
+  background-image: url('../../img/back2.png');
+  background-position: 90%;
   background-repeat: no-repeat;
   background-size: contain;
+  /*width: 80%;*/
 }
 
 .loginContainer {
   /*background-color: #dcdcdc;*/
+
   font-family: DINCyr,Arial,sans-serif!important;
   height: 100vh;
   display: flex;
@@ -16,6 +18,7 @@
   align-items: center;
   .box {
     background-color: #fff;
+    border-left: 5px solid rgb(76, 178, 66);
     border-radius: 30px;
     box-shadow: 0 4px 17px rgba(0,0,0,.17);
     min-height: 400px;
