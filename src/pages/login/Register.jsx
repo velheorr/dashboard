@@ -2,7 +2,7 @@ import React from 'react';
 import './login.scss'
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../../hook/useAuth";
-import {Box, Button, Container, CssBaseline, Typography} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import logo from '../../img/logo.png';
 import TextField from "@mui/material/TextField";
 import {useForm} from "react-hook-form";
@@ -19,7 +19,6 @@ const Register = () => {
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm({
         mode: "onTouched",
@@ -27,7 +26,6 @@ const Register = () => {
     });
 
     const onSubmit = (data) => {
-        /*console.log(data)*/
         signIn('user', ()=> navigate(fromPage, {replace: true}));
     }
 

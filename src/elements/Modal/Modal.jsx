@@ -4,7 +4,6 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {useDispatch, useSelector} from "react-redux";
 import {closeModal, openModal} from "./ModalSlice";
@@ -15,7 +14,6 @@ import {palette} from "../../utils/theme";
 
 export default function TransitionsModal() {
     const dispatch = useDispatch();
-    const handleOpen = () => dispatch(openModal());
     const handleClose = () => dispatch(closeModal());
 
     const open = useSelector(state => state.modal.open);

@@ -5,7 +5,6 @@ import {useNavigate} from "react-router";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ModeNightIcon from "@mui/icons-material/ModeNight";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import TuneIcon from '@mui/icons-material/Tune';
 
 import './header.scss'
 import {useDispatch, useSelector} from "react-redux";
@@ -26,6 +25,7 @@ const Header = () => {
 
     // разлогинить
     const handleLogout = () => {
+        localStorage.setItem('auth', JSON.stringify(false));
         signOut(()=> navigate('/', {replace: true}));
     }
 
@@ -62,11 +62,11 @@ const Header = () => {
 
                         <Typography variant="h6" component="div" sx={{fontWeight: 600}}>Главное меню</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center'}}>
-                            <Tooltip title={<Typography variant="body2" gutterBottom>Настройки светофора</Typography>}>
+                            {/*<Tooltip title={<Typography variant="body2" gutterBottom>Настройки светофора</Typography>}>
                                 <IconButton color={'inherit'}>
                                     <TuneIcon/>
                                 </IconButton>
-                            </Tooltip>
+                            </Tooltip>*/}
                             <Tooltip title={<Typography variant="body2" gutterBottom>Смена темы</Typography>}>
                                 <IconButton color={'inherit'} onClick={toggleTheme}>
                                     {mode === 'light'? <LightModeIcon/> : <ModeNightIcon />}

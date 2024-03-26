@@ -27,7 +27,6 @@ const DetailedView = () => {
 
     useEffect(()=>{
         if (Object.keys(currentItem).length === 0) {
-            // Объект пуст
             navigate('/')
         }
     },[currentItem])

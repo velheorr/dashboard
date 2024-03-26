@@ -4,13 +4,13 @@ const txt ={
     min: "Пароль должен иметь длину от 4 до 16 символов",
     max: "Пароль должен иметь длину от 4 до 16 символов",
     match: "Пароли не совпадают",
-    email: "Некорректный адрес электронной почты"
+    login: "Некорректный адрес электронной почты"
 }
 
 export const loginSchema = yup.object().shape({
-    email: yup.string()
+    login: yup.string()
         .required("Укажите ваш Email")
-        .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, txt.email),
+        .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, txt.login),
     password: yup.string()
         .required("Введите пароль")
         .min(4, txt.min)

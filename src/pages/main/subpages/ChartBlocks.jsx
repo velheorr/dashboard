@@ -17,7 +17,7 @@ const ChartBlocks = ({item})=>{
     return	<Link to='/detailedView' onClick={handleClick}>
         <div style={{display: 'inline-block', width: '50%'}} >
             <BlockShadow>
-                <Tooltip title={item.НаименованиеОбъекта} size="large">
+                <Tooltip title={<Typography variant="body2" gutterBottom>{item.НаименованиеОбъекта}</Typography>}>
                     <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
                                 noWrap
                                 align='center'

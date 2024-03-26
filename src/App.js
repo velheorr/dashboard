@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import './App.css';
-import {Routes, Route, Link} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import {Counter} from "./features/counter/Counter";
 import Page404 from "./pages/404/Page404";
 import {Layout} from "./pages/Layout";
@@ -18,9 +18,6 @@ import DetailedView from "./pages/main/subpages/DetailedView";
 import TransitionsModal from "./elements/Modal/Modal";
 
 function App() {
-
-
-
     const mode = useSelector(state => state.header.mode);
     const theme = useMemo(
         () => createTheme(themeMode),
