@@ -30,8 +30,6 @@ const Filters = () => {
         }
     }, [dataFromDB])
 
-
-
     const filterDataChart = (data, byHolding = false, byKontragent = false,) => {
         let dataFilterChart = [];
         const datafilter = (by, obj, target)=> {
@@ -108,7 +106,7 @@ const Filters = () => {
                     <Typography sx={{ }} variant="body1">Всего объектов: {amount}</Typography>
                 </FormControl>
                 <Tooltip title={<Typography variant="body2" gutterBottom>Описание GuardianDashboard</Typography>}>
-                    <span style={{float: "right"}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                    <span style={{float: "right", paddingTop: '15px'}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
                 </Tooltip>
             </Box>
         </div>

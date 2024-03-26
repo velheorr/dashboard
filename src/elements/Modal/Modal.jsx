@@ -28,7 +28,6 @@ export default function TransitionsModal() {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 600,
-       /* bgcolor: 'background.paper',*/
         bgcolor:  modal_bg,
         color: modal_color,
         border: '1px solid rgba(0,0,0,.2)',
@@ -145,7 +144,6 @@ export default function TransitionsModal() {
 
     return (
         <div>
-            {/*<Button onClick={handleOpen}>Open modal</Button>*/}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -161,15 +159,14 @@ export default function TransitionsModal() {
                 }}
             >
                 <Fade in={open}>
-                        <Box sx={style}>
-                            <div className='modalBtn'>
-                                <IconButton onClick={handleClose} size="large" sx={{color: palette.white}}><CloseIcon fontSize='inherit'/></IconButton>
-                            </div>
-                            <div style={{color: mode === "dark" ?  palette.white : palette.black}}>
-                                {modalData}
-                            </div>
-
-                        </Box>
+                    <Box sx={style}>
+                        <div className='modalBtn'>
+                            <IconButton onClick={handleClose} size="large" sx={{color: palette.white}}><CloseIcon fontSize='inherit'/></IconButton>
+                        </div>
+                        <div style={{color: mode === "dark" ?  palette.white : palette.black}}>
+                            {modalData}
+                        </div>
+                    </Box>
                 </Fade>
             </Modal>
         </div>

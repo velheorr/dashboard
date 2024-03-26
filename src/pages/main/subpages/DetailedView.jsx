@@ -90,7 +90,6 @@ const DetailedView = () => {
                             gutterBottom>
                     {currentItem.НаименованиеОбъекта}
                 </Typography>
-
                 {currentItem? <Chart item={currentItem} variant='detailed'/> : <div>no data</div>}
             </BlockShadow>
             <BlockShadow>
@@ -106,7 +105,6 @@ const DetailedView = () => {
                 </Typography>
                 {currentItem?
                     <List>
-
                         <CustomItem name="Коэффициент сложности Объекта:"
                                     value={`${currentItem.КоэфСложностиФакт} / ${currentItem.КоэфСложностиПлан}`}
                                     tooltip1={`ПЛАН - это коэффициент усложнения Объекта, предусмотренный Техническим решением.`}
@@ -140,9 +138,7 @@ const DetailedView = () => {
                     </List>
                     : <div>no data</div>
                 }
-
             </BlockShadow>
-
         </div>
     )
 };

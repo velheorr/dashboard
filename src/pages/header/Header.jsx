@@ -62,11 +62,6 @@ const Header = () => {
 
                         <Typography variant="h6" component="div" sx={{fontWeight: 600}}>Главное меню</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center'}}>
-                            {/*<Tooltip title={<Typography variant="body2" gutterBottom>Настройки светофора</Typography>}>
-                                <IconButton color={'inherit'}>
-                                    <TuneIcon/>
-                                </IconButton>
-                            </Tooltip>*/}
                             <Tooltip title={<Typography variant="body2" gutterBottom>Смена темы</Typography>}>
                                 <IconButton color={'inherit'} onClick={toggleTheme}>
                                     {mode === 'light'? <LightModeIcon/> : <ModeNightIcon />}
