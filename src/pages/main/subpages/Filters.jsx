@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../main.scss'
-import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Typography} from "@mui/material";
+import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip, Typography} from "@mui/material";
 import {palette} from "../../../utils/theme";
 import {useDispatch, useSelector} from "react-redux";
 import {setFilteredDataChart, setFilteredKontragentByHolding} from "../MainSlice";
@@ -107,7 +107,9 @@ const Filters = () => {
                 <FormControl sx={{m:1, width: 300, verticalAlign: 'bottom', textAlign: 'right'}} >
                     <Typography sx={{ }} variant="body1">Всего объектов: {amount}</Typography>
                 </FormControl>
-                <span style={{float: "right"}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                <Tooltip title={<Typography variant="body2" gutterBottom>Описание GuardianDashboard</Typography>}>
+                    <span style={{float: "right"}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                </Tooltip>
             </Box>
         </div>
     );

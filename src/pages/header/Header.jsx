@@ -62,18 +62,18 @@ const Header = () => {
 
                         <Typography variant="h6" component="div" sx={{fontWeight: 600}}>Главное меню</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center'}}>
-                            <Tooltip title="Настройки светофора" size="large">
+                            <Tooltip title={<Typography variant="body2" gutterBottom>Настройки светофора</Typography>}>
                                 <IconButton color={'inherit'}>
                                     <TuneIcon/>
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title="Смена темы" size="large" onClick={toggleTheme}>
-                                <IconButton color={'inherit'}>
+                            <Tooltip title={<Typography variant="body2" gutterBottom>Смена темы</Typography>}>
+                                <IconButton color={'inherit'} onClick={toggleTheme}>
                                     {mode === 'light'? <LightModeIcon/> : <ModeNightIcon />}
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title="Выйти из аккаунта" size="large" onClick={handleLogout}>
-                                <IconButton color={'inherit'}>
+                            <Tooltip title={<Typography variant="body2" gutterBottom>Выйти из аккаунта</Typography>}>
+                                <IconButton color={'inherit'} onClick={handleLogout}>
                                     <LogoutIcon />
                                 </IconButton>
                             </Tooltip>

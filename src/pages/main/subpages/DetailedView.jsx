@@ -81,9 +81,10 @@ const DetailedView = () => {
             </div>
 
             <BlockShadow>
-
-                <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectDiagram')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
-                <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
+                <Tooltip title={<Typography variant="body2" gutterBottom>Справка к дтаграмме проекта</Typography>}>
+                    <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectDiagram')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                </Tooltip>
+                    <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
                             noWrap
                             align='center'
                             variant="h6"
@@ -94,7 +95,9 @@ const DetailedView = () => {
                 {currentItem? <Chart item={currentItem} variant='detailed'/> : <div>no data</div>}
             </BlockShadow>
             <BlockShadow>
-                <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectParams')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                <Tooltip title={<Typography variant="body2" gutterBottom>Справка к параметрам проекта</Typography>}>
+                    <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectParams')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                </Tooltip>
                 <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}
                             noWrap
                             align='center'
