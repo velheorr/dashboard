@@ -1,8 +1,6 @@
 import React from 'react';
-import {Skeleton, Stack} from "@mui/material";
+import {Skeleton} from "@mui/material";
 import BlockShadow from "./BlockShadow";
-import {settings} from "./slider/sliderSettings";
-import Slider from "./slider/Slider";
 
 const Skelet = () => {
     return (
