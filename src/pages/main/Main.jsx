@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import './main.scss'
+import '../layout.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {Filters} from "./subpages/Filters";
 import { Typography} from "@mui/material";

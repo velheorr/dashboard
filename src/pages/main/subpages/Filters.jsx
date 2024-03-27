@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import '../main.scss'
+import '../../layout.scss'
 import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip, Typography} from "@mui/material";
 import {palette} from "../../../utils/theme";
 import {useDispatch, useSelector} from "react-redux";
@@ -68,7 +68,7 @@ const Filters = () => {
 
     return (
         <div>
-            <Box sx={{minWidth: 120, mb: '20px', }}>
+            <Box sx={{minWidth: 120, mb: '10px'}}>
                 <FormControl sx={{m:1, width: 300,}} variant="standard">
                     <InputLabel id="holding-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Холдинг</InputLabel>
                     <Select

@@ -8,7 +8,7 @@ import {
     Typography
 } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import '../main.scss'
+import '../../layout.scss'
 import {useNavigate} from "react-router";
 import Chart from "../../../elements/Chart";
 
