@@ -1,115 +1,170 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import '../../layout.scss'
-import {Box, FormControl, IconButton, InputLabel, MenuItem, Select, Tooltip, Typography} from "@mui/material";
+import  '../main.scss'
+import {
+    Box,
+    FormControl,
+    IconButton,
+    InputAdornment,
+    InputLabel,
+    MenuItem,
+    Select,
+    Tooltip,
+    Typography
+} from "@mui/material";
 import {palette} from "../../../utils/theme";
 import {useDispatch, useSelector} from "react-redux";
-import {setFilteredDataChart, setFilteredKontragentByHolding} from "../MainSlice";
+import {
+    setFilteredData,
+    setKontragent,
+} from "../MainSlice";
 import {prepareSelect} from "../../../utils/func";
-import * as PropTypes from "prop-types";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import {useModal} from "../../../hook/useModal";
+import TextField from "@mui/material/TextField";
+import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 
-HelpOutlineIcon.propTypes = {fontSize: PropTypes.string};
+
 
 const Filters = () => {
     const mode = useSelector(state => state.header.mode);
     const selectHolding = useSelector(state => state.mainData.selectHolding);
-    const filteredKontragentByHolding = useSelector(state => state.mainData.filteredKontragentByHolding);
+    const selectKontragent = useSelector(state => state.mainData.selectKontragent);
+    const filteredData = useSelector(state => state.mainData.filteredData);
     const dataFromDB = useSelector(state => state.mainData.dataFromDB);
-
     const dispatch = useDispatch();
 
-    const [holding, setHolding] = useState('');
-    const [zakazchik, setZakazchik] = useState('');
+    /*отображение кол-ва обьектов*/
     const [amount, setAmount] = useState(0)
 
-
     useEffect(()=>{
-        if (dataFromDB){
-            setAmount(dataFromDB.length)
+        if (filteredData){
+            setAmount(filteredData.length)
         }
-    }, [dataFromDB])
+    }, [filteredData])
 
-    const filterDataChart = (data, byHolding = false, byKontragent = false,) => {
-        let dataFilterChart = [];
-        const datafilter = (by, obj, target)=> {
-            return  by.filter(item => item[obj] === target)
+    const [holding, setHolding] = useState('Все');
+    const [zakazchik, setZakazchik] = useState('Все');
+
+    /*ф-я фильтра, используется селектом холдинга*/
+    const funcChangeHolding = (item)=>{
+        let forFilter = []
+        const doFilter = (param)=>{
+            return dataFromDB.filter(i => i.Холдинг === param)
         }
-        if (!byHolding && !byKontragent){
-            dataFilterChart = data
-        }
-        if (byHolding) {
-            dataFilterChart = datafilter(data, 'Холдинг', byHolding)
-        }
-        if (byKontragent) {
-            dataFilterChart = datafilter(dataFilterChart.length > 0 ? dataFilterChart : data, 'Контрагент', byKontragent)
-        }
-        setAmount(dataFilterChart.length)
-        dispatch(setFilteredDataChart(dataFilterChart))
+        if(item === 'ПРОЧИЕ' || item === ''){forFilter = doFilter('ПРОЧИЕ').concat(doFilter(''))}
+        else if (item === 'Все'){forFilter = dataFromDB}
+        else {forFilter = doFilter(item)}
+        return forFilter
     }
+    /*ф-я селекта холдинга*/
+    const handleChangeHolding = (e = false, fromZakazchik)=>{
+        const item = e ? e.target.value : fromZakazchik
+        setHolding(item);
+        setZakazchik('Все')
+        const filtered = funcChangeHolding(item)
+        dispatch(setFilteredData(filtered))
+        dispatch(setKontragent(prepareSelect(filtered, 'Контрагент')))
+    }
+    /*ф-я селекта заказчика*/
+    const handleChangeZakazchik = (e)=>{
+        const item = e.target.value
+        setZakazchik(item);
+        const filteredByHolding = funcChangeHolding(holding)
 
-
-    const handleChangeHolding = (event) => {
-        dispatch(setFilteredKontragentByHolding(prepareSelect(dataFromDB, 'Контрагент', event.target.value)))
-        setHolding(event.target.value);
-        if (event.target.value === ''){
-            filterDataChart(dataFromDB, false, false)
-        } else {
-            filterDataChart(dataFromDB, event.target.value, false)
+        let forFilter = []
+        const doFilter = (param)=>{
+            return filteredByHolding.filter(i => i.Контрагент === param)
         }
-    };
-    const handleChangeZakazchik = (event) => {
-        setHolding(dataFromDB.find(item => item.Контрагент === event.target.value).Холдинг)
-        setZakazchik(event.target.value);
-        filterDataChart(dataFromDB, false, event.target.value)
-    };
+
+        if (item === 'Все'){forFilter = filteredByHolding}
+        else {forFilter = doFilter(item)}
+
+        dispatch(setFilteredData(forFilter))
+    }
 
     const {setModal} = useModal()
 
+    /*Поиск*/
+    const [search, setSearch] = useState('')
+    /*Очистка поля поиска*/
+    const resetSearch = ()=> {
+        setSearch('')
+        dispatch(setFilteredData(dataFromDB))
+        handleChangeHolding(false, "Все")
+    }
+    /*Обновление поля поиска*/
+    const handleSearch = (e) =>{
+        e.preventDefault()
+        setSearch(e.target.value)
+    }
+    /*ф-я поиска*/
+    const handleKeyDown = (e)=>{
+        if (e.key === 'Enter' && search.length > 2) {
+            const searchedData = filteredData.filter(i => {
+                return i.НаименованиеОбъекта.toLowerCase().includes(search.toLowerCase()) || i.КодОбъекта.includes(search)
+            })
+            dispatch(setFilteredData(searchedData))
+        }
+    }
+
     return (
-        <div>
-            <Box sx={{minWidth: 120, mb: '10px'}}>
-                <FormControl sx={{m:1, width: 300,}} variant="standard">
-                    <InputLabel id="holding-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Холдинг</InputLabel>
-                    <Select
-                        labelId="holding-label"
-                        id="holding"
-                        value={holding}
-                        onChange={handleChangeHolding}
-                        sx={{color: mode === "dark" ? palette.white : palette.black,}}
-                    >
-                        {
-                            selectHolding.map((item, i) => {
-                                let x = item === '' ? 'Не указан' : item
-                                return <MenuItem key={i} value={item}>{x}</MenuItem>
-                            })
-                        }
-                    </Select>
-                </FormControl>
-                <FormControl sx={{m:1, width: 300}} variant="standard">
-                    <InputLabel id="zakazchik-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Заказчик</InputLabel>
-                    <Select
-                        labelId="zakazchik-label"
-                        id="zakazchik"
-                        value={zakazchik}
-                        onChange={handleChangeZakazchik}
-                        sx={{color: mode === "dark" ? palette.white : palette.black}}
-                    >
-                        {
-                            filteredKontragentByHolding.map((item, i) => {
-                                return <MenuItem key={i} value={item}>{item}</MenuItem>
-                            })
-                        }
-                    </Select>
-                </FormControl>
-                <FormControl sx={{m:1, width: 300, verticalAlign: 'bottom', textAlign: 'right'}} >
-                    <Typography sx={{ }} variant="body1">Всего объектов: {amount}</Typography>
-                </FormControl>
-                <Tooltip title={<Typography variant="body2" gutterBottom>Описание GuardianDashboard</Typography>}>
-                    <span style={{float: "right", paddingTop: '15px'}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
-                </Tooltip>
+            <Box sx={{minWidth: 120, mb: '10px'}} className='mainFilters'>
+                <div>
+                    <FormControl sx={{width: 300,mr: '15px'}} variant="standard">
+                        <InputLabel id="holding-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Холдинг</InputLabel>
+                        <Select
+                            labelId="holding-label"
+                            id="holding"
+                            value={holding}
+                            defaultValue='Все'
+                            onChange={handleChangeHolding}
+                            sx={{color: mode === "dark" ? palette.white : palette.black,}}
+                        >
+                            <MenuItem value={'Все'}><b>Все холдинги</b></MenuItem>
+                            {
+                                selectHolding.map((item, i) => {
+                                    /*let x = item === '' ? 'Не указан' : item*/
+                                    return <MenuItem key={i} value={item}>{item}</MenuItem>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                    <FormControl sx={{width: 300,mr: '15px'}} variant="standard">
+                        <InputLabel id="zakazchik-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Заказчик</InputLabel>
+                        <Select
+                            labelId="zakazchik-label"
+                            id="zakazchik"
+                            value={zakazchik}
+                            defaultValue='Все'
+                            onChange={handleChangeZakazchik}
+                            sx={{color: mode === "dark" ? palette.white : palette.black}}
+                        >
+                            <MenuItem  value={'Все'}><b>Все заказчики</b></MenuItem>
+                            {
+                                selectKontragent.map((item, i) => {
+                                    return <MenuItem key={i} value={item}>{item}</MenuItem>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                </div>
+
+                <div className='searchFilter'>
+                    <TextField id="realiz_search" sx={{pt: '15px', width: '300px', pr: '15px'}}  variant="standard" placeholder='Поиск' value={search}
+                               onKeyDown={handleKeyDown}  onChange={handleSearch} InputProps={{
+                        startAdornment: (<InputAdornment position="start"><SearchIcon /></InputAdornment>),
+                        endAdornment:(<InputAdornment position="end"><IconButton onClick={resetSearch}><CloseIcon /></IconButton></InputAdornment>)
+                    }}/>
+                    <div className='objects'><b>Объектов: {amount}</b></div>
+
+                    <Tooltip title={<Typography variant="body2" gutterBottom>Описание GuardianDashboard</Typography>}>
+                        <span style={{float: "right", paddingTop: '15px'}}><IconButton onClick={()=> {setModal('mainPage')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
+                    </Tooltip>
+                </div>
+
             </Box>
-        </div>
     );
 };
 

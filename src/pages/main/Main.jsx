@@ -1,13 +1,11 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import '../layout.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {Filters} from "./subpages/Filters";
 import { Typography} from "@mui/material";
 
 import {
-	getData,
-	setFilteredDataChart,
-	setFilteredKontragentByHolding,
+	getData, setFilteredData,
 	setHoldings,
 	setKontragent
 } from "./MainSlice";
@@ -23,20 +21,18 @@ import Skelet from "../../elements/Skelet";
 
 
 const Main = () => {
-	const dataFromDB = useSelector(state => state.mainData.dataFromDB);
-	const filteredDatabyKontragentChart = useSelector(state => state.mainData.filteredDatabyKontragentChart);
+	const filteredData = useSelector(state => state.mainData.filteredData);
 	const dispatch = useDispatch();
 	const {data, isLoading, isError} = useGetQuery()
 
 	useEffect(()=>{
 		dispatch(getData(data))
-		if (dataFromDB !== undefined){
-			 dispatch(setHoldings(prepareSelect(dataFromDB, 'Холдинг')))
-			 dispatch(setKontragent(prepareSelect(dataFromDB, 'Контрагент')))
-			 dispatch(setFilteredKontragentByHolding(prepareSelect(dataFromDB, 'Контрагент')))
-			 dispatch(setFilteredDataChart(dataFromDB))
+		if (data){
+			dispatch(setFilteredData(data))
+			 dispatch(setHoldings(prepareSelect(data, 'Холдинг')))
+			 dispatch(setKontragent(prepareSelect(data, 'Контрагент')))
 		}
-	}, [data, dataFromDB])
+	}, [data])
 
 
 	if (isLoading) {return <Skelet/>}
@@ -52,7 +48,7 @@ const Main = () => {
 				{
 					isLoading
 						? <div>Нет данных</div>
-						:filteredDatabyKontragentChart?.map((item, i) => {
+						:filteredData?.map((item, i) => {
 							return <ChartBlocks item={item} key={i}/>
 						})
 				}
