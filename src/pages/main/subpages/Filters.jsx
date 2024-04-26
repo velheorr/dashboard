@@ -26,7 +26,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 
 
-
 const Filters = () => {
     const mode = useSelector(state => state.header.mode);
     const selectHolding = useSelector(state => state.mainData.selectHolding);
@@ -125,7 +124,6 @@ const Filters = () => {
                             <MenuItem value={'Все'}><b>Все холдинги</b></MenuItem>
                             {
                                 selectHolding.map((item, i) => {
-                                    /*let x = item === '' ? 'Не указан' : item*/
                                     return <MenuItem key={i} value={item}>{item}</MenuItem>
                                 })
                             }
