@@ -6,19 +6,28 @@ header {
   width: 100%;
 }
 
-main {
-  height: 100%;
+main>div {
   display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 65px);
-  width: 95%;
-  margin: 0 auto;
-  /*padding: 20px 0;*/
-  padding-top: 65px;
-  .topTitle {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 15px;
-  }
+  justify-content: flex-start;
+  padding-top: 64px;
+  max-height: calc(100vh - 64px);
 }
 
+
+.pageContainer {
+  padding-left: 35px;
+  flex: 1 0 auto;
+  height: calc(100vh - 65px);
+  max-width: 95%;
+  .main {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 65px);
+    margin: 0 auto;
+    .topTitle {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 15px;
+    }
+  }
+}

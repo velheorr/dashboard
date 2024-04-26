@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './login.scss'
 import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "../../hook/useAuth";
-import {Box, Button, IconButton, Tooltip, Typography} from "@mui/material";
-import logo from '../../img/logo.png';
+import {Box, Button, Divider, IconButton, InputAdornment, Tooltip, Typography} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import {useForm} from "react-hook-form";
 import {palette} from "../../utils/theme";
@@ -11,6 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {loginSchema} from "./verify";
 import axios from "axios";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 
 const Login = () => {
@@ -22,7 +23,21 @@ const Login = () => {
     const [auth, setAuth] = useState(false)
     const [authMsg, setAuthMsg] = useState('')
 
+    /*проверить что п-ль авторизован не более 1 дня*/
+    const checkLogin = ()=>{
+        const date = localStorage.getItem('login')
+        const today = new Date();
+        const currentDay = today.toISOString().slice(0,10);
+
+        if (date === null){
+            localStorage.setItem('login', currentDay)
+        } else if(date > currentDay){
+            localStorage.setItem('auth', false)
+        }
+    }
+
     useEffect(() => {
+        checkLogin()
         const authed = JSON.parse(localStorage.getItem('auth'))
         if (authed) {
             setAuth(true);
@@ -41,71 +56,87 @@ const Login = () => {
 
     const onSubmit = async (data) => {
         setAuthMsg('Проверка данных')
+        checkLogin()
         try {
-            let result
-            await axios.post('http://grd228:5000/api/login', data).then(res => result =res.data)
-            if (result) {
+            let sendData = {...data, from: 'dashboard'}
+            const response = await axios.post('http://grd228:5000/api/login', sendData)
+            setAuthMsg(response.data.message)
+            if (response.status === 200) {
                 setAuthMsg('')
-                localStorage.setItem('auth', JSON.stringify(result));
-                setAuth(result)
+                localStorage.setItem('auth', true);
+                localStorage.setItem('name', response.data.name);
+                setAuth(true)
             }
         } catch (e) {
-            setAuthMsg('Неверные данные')
+            if (e.response.status === 401) {
+                setAuthMsg(e.response.data.message)
+            } else {
+                setAuthMsg('Неверные данные')
+            }
             console.log(e)
         }
     }
 
-    return (
-        <div className='lionBG'>
-            <div className='loginContainer'>
-                <Box className='box'>
-                    <div>
-                        <img className='img' src={logo} alt=""/>
-                        <Typography sx={{mt: 2, fontWeight: 600}} align='center' variant="h5" gutterBottom>DASHBOARD</Typography>
-                        <Tooltip title={
-                            <>
-                                <Typography variant="body2" gutterBottom>Для тестового входа используйте:</Typography>
-                                <Typography variant="body2" gutterBottom>Логин: test@grdn.ru</Typography>
-                                <Typography variant="body2" gutterBottom>Пароль: dashboard</Typography>
-                            </>
-                        } >
-                            <span style={{position: 'absolute'}}><IconButton size="small" ><HelpOutlineIcon /></IconButton></span>
-                        </Tooltip>
-                        <Typography sx={{mt: 2, fontWeight: 600}} align='left' variant="h6" gutterBottom>
-                            Авторизация:
-                            <em style={{color: 'orange', paddingLeft: '10px', fontSize: '18px'}}>{authMsg}</em>
-                        </Typography>
-                        <Box
-                            onSubmit={handleSubmit(onSubmit)}
-                            component="form"
-                            sx={{'& > :not(style)': { m: 1, width: '100'},}}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <TextField fullWidth  id="login" label="E-mail"  variant="outlined" type='email' size='small'
-                                       {...register("login")}
-                                       error={errors.login && true}
-                                       helperText={errors.login && <span style={{color: 'red'}}>{errors.login.message}</span>}
-                            />
-                            <TextField fullWidth  id="password" label="Пароль" variant="outlined" type='password' size='small'
-                                       {...register("password")}
-                                       error={errors.password && true}
-                                       helperText={errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}
-                            />
-                            <Button fullWidth variant="outlined" type='submit' size='small' color="success">Войти</Button>
-                        </Box>
-                        <Box sx={{textAlign: 'right', mt: 2}}>
-                            <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
-                                Ещё не зарегистрированы? <Link to='/register'>Регистрация</Link>
-                            </Typography>
-                            <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
-                                Забыли пароль? <Link to='/resetPassword'>Сброс пароля</Link>
-                            </Typography>
-                        </Box>
-                    </div>
-                </Box>
-            </div>
+    const [show, setShow] = useState(false)
+    const showPass = () =>{
+        setShow(!show)
+    }
 
+    return (
+        <div>
+            <Divider  sx={{color:palette.grey["500"], fontSize: '18px', mb: 1}}>Вход</Divider>
+            {/* <Typography sx={{fontWeight: 600,}} align='left' variant="h6" gutterBottom>Вход</Typography>*/}
+            <Typography align='right' variant="subtitle1" sx={{color: "orange"}}>{authMsg}</Typography>
+            <Box
+                onSubmit={handleSubmit(onSubmit)}
+                component="form"
+                sx={{'& > :not(style)': {m: 1, width: '100'},}}
+                noValidate
+                autoComplete="off"
+            >
+                <TextField fullWidth id="login" label="E-mail" variant="outlined" type='email' size='small'
+                           {...register("login")}
+                           error={errors.login && true}
+                    /*helperText={errors.login && <span style={{color: 'red'}}>{errors.login.message}</span>}*/
+                           helperText={
+                               errors.login ? <span style={{color: 'red'}}>{errors.login.message}</span>
+                                   : <span style={{height: '20px'}}> </span>
+                           }
+                />
+                <TextField fullWidth id="password" label="Пароль" variant="outlined" type={ show ? 'text' : 'password'}
+                           size='small'
+                           {...register("password")}
+                           error={errors.password && true}
+                    /*helperText={errors.password && <span style={{color: 'red'}}>{errors.password.message}</span>}*/
+                           helperText={
+                               errors.password ? <span style={{color: 'red'}}>{errors.password.message}</span>
+                                   : <span style={{height: '40px'}}> </span>
+                           }
+                           InputProps={{
+                               endAdornment:(<InputAdornment position="end" onClick={showPass}><IconButton sx={{padding: 0}}>
+                                   { show ?   <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                               </IconButton></InputAdornment>)
+                           }}
+                />
+                <Button fullWidth variant="outlined" type='submit' size='small' color="success">Войти</Button>
+            </Box>
+            <Box sx={{textAlign: 'right', mt: 2}}>
+                <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
+                    Ещё не зарегистрированы? <Link to='/register'>Регистрация</Link>
+                </Typography>
+                <Typography variant="caption" display="block" gutterBottom color={palette.grey["500"]}>
+                    Забыли пароль? <Link to='/resetPassword'>Сброс пароля</Link>
+                </Typography>
+            </Box>
+            <Tooltip title={
+                <>
+                    <Typography variant="body2" gutterBottom>Для тестового входа используйте:</Typography>
+                    <Typography variant="body2" gutterBottom>Логин: test@grdn.ru</Typography>
+                    <Typography variant="body2" gutterBottom>Пароль: pass123</Typography>
+                </>
+            }>
+                <span><IconButton className='blink' size="small"><HelpOutlineIcon/></IconButton></span>
+            </Tooltip>
         </div>
     );
 };

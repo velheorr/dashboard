@@ -5,11 +5,12 @@ import {useNavigate} from "react-router";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ModeNightIcon from "@mui/icons-material/ModeNight";
 import LightModeIcon from "@mui/icons-material/LightMode";
-
+import logo from '../../img/logo.png';
 import './header.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {setMode} from './HeaderSlice'
 import {palette} from "../../utils/theme";
+import ThemeSwitch from "../../elements/ThemeSwitch/ThemeSwitch";
 
 
 const Header = () => {
@@ -17,6 +18,8 @@ const Header = () => {
     const {signOut} = useAuth()
     const dispatch = useDispatch();
     const mode = useSelector(state => state.header.mode);
+
+    const userName = localStorage.getItem('name') || ''
 
     // смена темы
     const toggleTheme = () => {
@@ -47,10 +50,11 @@ const Header = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="relative" sx={{background: mode === "dark" ? palette.grey[500] : palette.grey[700]}}>
-                <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: '0 !important'}}>
+                <Toolbar  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: '0 !important', pr: '5px !important'}}>
                     <Box className='logo'>
-                        <Typography component="div" sx={{fontWeight: 600}}>GUARDIAN</Typography>
-                        <Typography component="div" sx={{fontWeight: 600}}>DASHBOARD</Typography>
+                        <img src={logo} alt="iBoard" style={{width: '190px'}}/>
+                        {/*<Typography component="div" sx={{fontWeight: 600}}>GUARDIAN</Typography>*/}
+                        <Typography component="div" sx={{fontWeight: 600, fontSize: '14px'}}>DASHBOARD</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-between',
                         color: mode === "dark" ? palette.white : palette.black}}
@@ -62,11 +66,8 @@ const Header = () => {
 
                         <Typography variant="h6" component="div" sx={{fontWeight: 600}}>Главное меню</Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center'}}>
-                            <Tooltip title={<Typography variant="body2" gutterBottom>Смена темы</Typography>}>
-                                <IconButton color={'inherit'} onClick={toggleTheme}>
-                                    {mode === 'light'? <LightModeIcon/> : <ModeNightIcon />}
-                                </IconButton>
-                            </Tooltip>
+                            <ThemeSwitch toggleTheme={toggleTheme}/>
+                            <div>{userName}</div>
                             <Tooltip title={<Typography variant="body2" gutterBottom>Выйти из аккаунта</Typography>}>
                                 <IconButton color={'inherit'} onClick={handleLogout}>
                                     <LogoutIcon />

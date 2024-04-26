@@ -2,7 +2,7 @@ import * as yup from "yup"
 
 const txt ={
     min: "Пароль должен иметь длину от 4 до 16 символов",
-    max: "Пароль должен иметь длину от 4 до 16 символов",
+    max: "Длинна пароля должа быть от 4 до 16 символов",
     match: "Пароли не совпадают",
     login: "Некорректный адрес электронной почты"
 }
@@ -18,7 +18,10 @@ export const loginSchema = yup.object().shape({
 });
 
 export const registerSchema = yup.object().shape({
-    email: yup.string()
+    name: yup.string()
+        .required("Необходимо ввести имя")
+        .min(4, txt.min),
+    login: yup.string()
         .required("Укажите ваш Email")
         .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,"Некорректный адрес электронной почты"),
     password: yup.string()
