@@ -24,6 +24,7 @@ import {useModal} from "../../../hook/useModal";
 import TextField from "@mui/material/TextField";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import {GFormControl, GInputLabel, GTextField} from "../../../elements/CustomMui/customMui";
 
 
 const Filters = () => {
@@ -111,8 +112,10 @@ const Filters = () => {
     return (
             <Box sx={{minWidth: 120, mb: '10px'}} className='mainFilters'>
                 <div>
-                    <FormControl sx={{width: 300,mr: '15px'}} variant="standard">
-                        <InputLabel id="holding-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Холдинг</InputLabel>
+                    <GFormControl sx={{width: 300,mr: '15px', }} variant="standard" >
+                   {/* <FormControl sx={{width: 300,mr: '15px'}} variant="standard">*/}
+                        <GInputLabel sx={{color: mode === "dark" ? palette.white : palette.black}}>Холдинг</GInputLabel>
+                        {/*<InputLabel id="holding-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Холдинг</InputLabel>*/}
                         <Select
                             labelId="holding-label"
                             id="holding"
@@ -128,9 +131,12 @@ const Filters = () => {
                                 })
                             }
                         </Select>
-                    </FormControl>
-                    <FormControl sx={{width: 300,mr: '15px'}} variant="standard">
-                        <InputLabel id="zakazchik-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Заказчик</InputLabel>
+                    {/*</FormControl>*/}
+                    </GFormControl>
+                    {/*<FormControl sx={{width: 300,mr: '15px'}} variant="standard">*/}
+                   <GFormControl sx={{width: 300,mr: '15px'}} variant="standard">
+                        {/*<InputLabel id="zakazchik-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Заказчик</InputLabel>*/}
+                       <GInputLabel id="zakazchik-label" sx={{color: mode === "dark" ? palette.white : palette.black}}>Заказчик</GInputLabel>
                         <Select
                             labelId="zakazchik-label"
                             id="zakazchik"
@@ -146,12 +152,13 @@ const Filters = () => {
                                 })
                             }
                         </Select>
-                    </FormControl>
+                    {/*</FormControl>*/}
+                    </GFormControl>
                 </div>
 
                 <div className='searchFilter'>
-                    <TextField id="realiz_search" sx={{pt: '15px', width: '300px', pr: '15px'}}  variant="standard" placeholder='Поиск' value={search}
-                               onKeyDown={handleKeyDown}  onChange={handleSearch} InputProps={{
+                    <GTextField id="realiz_search" sx={{pt: '15px', width: '300px', pr: '15px'}}  variant="standard" placeholder='Поиск' value={search}
+                        onKeyDown={handleKeyDown}  onChange={handleSearch} InputProps={{
                         startAdornment: (<InputAdornment position="start"><SearchIcon /></InputAdornment>),
                         endAdornment:(<InputAdornment position="end"><IconButton onClick={resetSearch}><CloseIcon /></IconButton></InputAdornment>)
                     }}/>
