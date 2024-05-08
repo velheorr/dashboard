@@ -29,11 +29,10 @@ const Login = () => {
         const today = new Date();
         const currentDay = today.toISOString().slice(0,10);
 
-        if (date === null){
-            localStorage.setItem('login', currentDay)
-        } else if(date > currentDay){
+        if(date !== currentDay){
             localStorage.setItem('auth', false)
         }
+        return currentDay
     }
 
     useEffect(() => {
@@ -56,16 +55,18 @@ const Login = () => {
 
     const onSubmit = async (data) => {
         setAuthMsg('Проверка данных')
-        checkLogin()
+        const loginDateChaeck = checkLogin()
+
         try {
             let sendData = {...data, from: 'dashboard'}
-            const response = await axios.post('http://grd228:5000/api/login', sendData)
+            const response = await axios.post('https://backend.s3grdn.ru/api/login', sendData)
             setAuthMsg(response.data.message)
             if (response.status === 200) {
                 setAuthMsg('')
                 localStorage.setItem('auth', true);
                 localStorage.setItem('name', response.data.name);
                 setAuth(true)
+                localStorage.setItem('login', loginDateChaeck)
             }
         } catch (e) {
             if (e.response.status === 401) {

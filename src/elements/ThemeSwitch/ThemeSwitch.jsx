@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import Switch from '@mui/material/Switch';
-import {Tooltip, Typography} from "@mui/material";
+import {FormControlLabel, Tooltip, Typography} from "@mui/material";
 import React from "react";
 
 
@@ -57,9 +57,10 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export default function ThemeSwitch({toggleTheme}) {
     return (
         <FormGroup>
-            <Tooltip title={<Typography variant="body2" gutterBottom>Смена темы</Typography>}>
-                <MaterialUISwitch defaultChecked={false} onClick={toggleTheme}/>
-            </Tooltip>
+            <FormControlLabel
+                control={ <MaterialUISwitch defaultChecked={false} onClick={toggleTheme} />}
+                label="Смена темы"
+            />
         </FormGroup>
     );
 }

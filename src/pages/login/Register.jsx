@@ -32,8 +32,7 @@ const Register = () => {
         /*console.log(regMsg)
         console.log(data)*/
         try {
-            const res = await axios.post('http://grd228:5000/api/register', data)
-            /*            console.log(res.data.result.id)*/
+            const res = await axios.post('https://backend.s3grdn.ru/api/register', data)
             if (res.data.result.id === 200){
                 setRegMsg("Пользователь успешно зарегистрирован")
                 navigate(fromPage, {replace: true})

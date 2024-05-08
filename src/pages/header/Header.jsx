@@ -1,16 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {AppBar, Box, IconButton, Toolbar, Tooltip, Typography} from "@mui/material";
+import {AppBar, Box, Toolbar, Typography} from "@mui/material";
 import {useAuth} from "../../hook/useAuth";
 import {useNavigate} from "react-router";
-import LogoutIcon from '@mui/icons-material/Logout';
-import ModeNightIcon from "@mui/icons-material/ModeNight";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import logo from '../../img/logo.png';
 import './header.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {setMode} from './HeaderSlice'
 import {palette} from "../../utils/theme";
-import ThemeSwitch from "../../elements/ThemeSwitch/ThemeSwitch";
+import DropMenu from "./DropMenu";
 
 
 const Header = () => {
@@ -65,7 +62,10 @@ const Header = () => {
                         </Box>
 
                         <Typography variant="h6" component="div" sx={{fontWeight: 600}}>Главное меню</Typography>
-                        <Box sx={{ display: 'flex', alignItems: 'center'}}>
+
+                        <DropMenu userName={userName} toggleTheme={toggleTheme} handleLogout={handleLogout}/>
+
+                        {/*<Box sx={{ display: 'flex', alignItems: 'center'}}>
                             <ThemeSwitch toggleTheme={toggleTheme}/>
                             <div>{userName}</div>
                             <Tooltip title={<Typography variant="body2" gutterBottom>Выйти из аккаунта</Typography>}>
@@ -73,7 +73,7 @@ const Header = () => {
                                     <LogoutIcon />
                                 </IconButton>
                             </Tooltip>
-                        </Box>
+                        </Box>*/}
                     </Box>
                 </Toolbar>
             </AppBar>

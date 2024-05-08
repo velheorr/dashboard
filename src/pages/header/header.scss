@@ -17,3 +17,32 @@
         letter-spacing: 3px;
     }
 }
+
+.disp {
+    button {
+        display: block;
+        /*border: 1px solid #80808026;*/
+        border: 1px solid #4cb24257;
+    }
+    :after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 2px;
+        background: #4cb242;;
+    }
+    .name, .role {
+        text-transform: none;
+        color: black;
+        font-family: DINCyr,Arial,sans-serif;
+        text-align: right;
+    }
+    .name {
+        font-size: 16px;
+    }
+    .role {
+        font-size: 12px;
+    }
+}
