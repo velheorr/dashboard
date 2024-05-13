@@ -25,7 +25,7 @@ const ResetPassword = () => {
     });
 
     const onSubmit = (data) => {
-        signIn('user', ()=> navigate(fromPage, {replace: true}));
+        navigate('/login', {replace: true})
     }
 
     return (

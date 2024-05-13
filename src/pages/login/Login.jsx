@@ -9,7 +9,6 @@ import {palette} from "../../utils/theme";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {loginSchema} from "./verify";
 import axios from "axios";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
@@ -129,15 +128,6 @@ const Login = () => {
                     Забыли пароль? <Link to='/resetPassword'>Сброс пароля</Link>
                 </Typography>
             </Box>
-            <Tooltip title={
-                <>
-                    <Typography variant="body2" gutterBottom>Для тестового входа используйте:</Typography>
-                    <Typography variant="body2" gutterBottom>Логин: test@grdn.ru</Typography>
-                    <Typography variant="body2" gutterBottom>Пароль: pass123</Typography>
-                </>
-            }>
-                <span><IconButton className='blink' size="small"><HelpOutlineIcon/></IconButton></span>
-            </Tooltip>
         </div>
     );
 };
