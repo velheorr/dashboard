@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {AppBar, Box, Toolbar, Typography} from "@mui/material";
 import {useAuth} from "../../hook/useAuth";
 import {useNavigate} from "react-router";
-import logo from '../../img/logo.png';
+import logoLight from '../../img/header/logoLight.png';
+import logoDark from '../../img/header/logoDark.png';
 import './header.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {setMode} from './HeaderSlice'
@@ -18,9 +19,16 @@ const Header = () => {
 
     const userName = localStorage.getItem('name') || ''
 
-    // смена темы
+    /* получить текущую тему*/
+    const getTheme = ()=>{
+        return  JSON.parse(localStorage.getItem('theme'))
+    }
+
     const toggleTheme = () => {
-        dispatch(setMode())
+        let theme = JSON.parse(localStorage.getItem('theme'))
+        let toggle = !theme
+        localStorage.setItem('theme', JSON.stringify(toggle));
+        dispatch(setMode(toggle))
     }
 
     // разлогинить
@@ -34,6 +42,7 @@ const Header = () => {
 
     useEffect(() => {
         window.setInterval(() => setTime(new Date()), 60 * 1000);
+        dispatch(setMode(getTheme()))
     }, []);
 
     const ruDate = new Intl.DateTimeFormat("ru", {
@@ -47,11 +56,10 @@ const Header = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="relative" sx={{background: mode === "dark" ? palette.grey[500] : palette.grey[700]}}>
-                <Toolbar  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: '0 !important', pr: '5px !important'}}>
+                <Toolbar  sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', pl: '0 !important', pr: '0 !important'}}>
                     <Box className='logo'>
-                        <img src={logo} alt="iBoard" style={{width: '190px'}}/>
-                        {/*<Typography component="div" sx={{fontWeight: 600}}>GUARDIAN</Typography>*/}
-                        <Typography component="div" sx={{fontWeight: 600, fontSize: '14px'}}>DASHBOARD</Typography>
+                        <img src={mode === "dark" ? logoDark : logoLight} alt="iBoard" style={{width: '190px'}}/>
+                        <Typography component="div" sx={{fontWeight: 600, fontSize: '14px', color: '#4cb242'}}>DASHBOARD</Typography>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, justifyContent: 'space-between',
                         color: mode === "dark" ? palette.white : palette.black}}

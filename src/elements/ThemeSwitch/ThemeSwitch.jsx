@@ -54,11 +54,11 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 
-export default function ThemeSwitch({toggleTheme}) {
+export default function ThemeSwitch({toggleTheme, handleClose}) {
     return (
         <FormGroup>
             <FormControlLabel
-                control={ <MaterialUISwitch defaultChecked={false} onClick={toggleTheme} />}
+                control={ <MaterialUISwitch defaultChecked={false} onClick={()=> {toggleTheme(); handleClose()}} />}
                 label="Смена темы"
             />
         </FormGroup>
