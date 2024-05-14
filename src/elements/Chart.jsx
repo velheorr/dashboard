@@ -117,7 +117,8 @@ const Chart = ({item, variant = false}) => {
 						))}
 					</Bar>
 					{/*<ReferenceLine x={100} stroke="black"  strokeWidth={2}>*/}
-					<ReferenceLine x={100} stroke={colorTheme()}  strokeWidth={2}>
+					<ReferenceLine x={100} stroke={colorTheme()}  strokeWidth={1}>
+						{/*<Label value="100" offset={-18} position="insideBottom" />*/}
 						<Label value="100" offset={-18} position="insideBottom" />
 					</ReferenceLine>
 				</BarChart>

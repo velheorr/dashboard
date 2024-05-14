@@ -43,9 +43,9 @@ export default function DropMenu({userName, toggleTheme, handleLogout}) {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
+                MenuListProps={{'aria-labelledby': 'basic-button', sx: {
+                        backgroundColor: mode === "dark" ? palette.color.grey : '', color: mode === "dark" ? palette.white : palette.black
+                    }}}
                 sx={{ width: 320}}
             >
                 <MenuItem ><ThemeSwitch toggleTheme={toggleTheme} handleClose={handleClose}/></MenuItem>
