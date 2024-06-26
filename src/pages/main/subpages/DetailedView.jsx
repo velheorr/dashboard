@@ -80,7 +80,7 @@ const DetailedView = () => {
             </div>
 
             <BlockShadow>
-                <Tooltip title={<Typography variant="body2" gutterBottom>Справка к дтаграмме проекта</Typography>}>
+                <Tooltip title={<Typography variant="body2" gutterBottom>Справка к диаграмме проекта</Typography>}>
                     <span style={{float: "right"}}><IconButton onClick={()=> {setModal('projectDiagram')}} size="small" sx={{color: mode === "dark" ? palette.white : palette.grey}}><HelpOutlineIcon /></IconButton></span>
                 </Tooltip>
                     <Typography sx={{mt: 2, pl: 1, pr: 1, color: mode === "dark" ? palette.white : palette.black, fontWeight: 600}}

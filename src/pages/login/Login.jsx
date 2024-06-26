@@ -58,7 +58,7 @@ const Login = () => {
 
         try {
             let sendData = {...data, from: 'dashboard'}
-            const response = await axios.post('https://backend.s3grdn.ru/api/login', sendData)
+            const response = await axios.post('http://grd228.grdn.ru:5000/api/login', sendData)
             setAuthMsg(response.data.message)
             if (response.status === 200) {
                 setAuthMsg('')
