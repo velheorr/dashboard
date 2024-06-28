@@ -9,6 +9,7 @@ import {palette} from "../../utils/theme";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {registerSchema} from "./verify";
 import axios from "axios";
+import {BACK} from "../../utils/links";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Register = () => {
         /*console.log(regMsg)
         console.log(data)*/
         try {
-            const res = await axios.post('https://backend.s3grdn.ru/api/register', data)
+            const res = await axios.post(`${BACK}/api/register`, data)
             if (res.data.result.id === 200){
                 setRegMsg("Пользователь успешно зарегистрирован")
                 setTimeout(function (){
